@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #005858;
+  --bg-color: #ffffff;
+  --secondary-bg: #F8F9FA;
+  --text-color: #333333;
+  --text-secondary: #6c757d;
+  --border-color: #e9ecef;
+  --sidebar-width: 260px;
+  --header-height: 70px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom classes if needed */
+.card-border-green {
+  @apply border-l-4 border-[#005858];
+}
+
+.tag-active {
+  @apply bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-semibold;
+}
+
+.tag-verified {
+  @apply bg-green-600 text-white px-2 py-0.5 rounded text-xs font-semibold;
+}
+
+.tag-analysis {
+  @apply bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs font-semibold;
+}
