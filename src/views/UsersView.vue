@@ -38,7 +38,7 @@
 
       <!-- Users Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 items-start">
-        <div v-for="user in filteredUsers" :key="user.id" class="bg-white rounded-[20px] shadow-sm border border-gray-300 flex flex-col group hover:shadow-md transition-all relative font-poppins text-left">
+        <div v-for="user in currentUsers" :key="user.id" class="bg-white rounded-[20px] shadow-sm border border-gray-300 flex flex-col group hover:shadow-md transition-all relative font-poppins text-left">
           <!-- Card Body -->
           <div class="p-4 sm:p-5 pb-0">
             <!-- User Header Row -->
@@ -80,7 +80,7 @@
                     <CheckCircle :size="18" class="text-[#005858]" />
                     <span class="font-medium">Aprovar</span>
                   </button>
-                  <button @click="handleStatusChange(user, 'Análise')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
+                  <button @click="handleStatusChange(user, 'Recusado')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
                     <CircleOff :size="18" class="text-[#f59e0b]" />
                     <span class="font-medium">Reprovar</span>
                   </button>
@@ -334,6 +334,7 @@ export default {
       if (status === 'Ativo') return `${base} bg-[#c6f6d5] text-[#22543d]`
       if (status === 'Análise') return `${base} bg-[#fefcbf] text-[#744210]`
       if (status === 'Bloqueado') return `${base} bg-[#fed7d7] text-[#822727]`
+      if (status === 'Recusado') return `${base} bg-[#fed7d7] text-[#822727]`
       return `${base} bg-gray-100 text-gray-700`
     },
     getDocBadgeClass(status) {
