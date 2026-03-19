@@ -102,15 +102,15 @@
             <!-- Sales Section -->
             <div class="mb-0 mt-2">
               <p class="text-[13px] sm:text-[15px] text-gray-500 mb-0.5 font-medium">Vendas últimos 7 dias</p>
-              <h2 class="text-[20px] sm:text-[24px] font-black text-[#333] tracking-tight">{{ user.sales }}</h2>
+              <h2 class="text-[20px] sm:text-[24px] font-black text-[#333] tracking-tighter leading-none mb-1">{{ user.sales }}</h2>
             </div>
           </div>
 
           <!-- Divider -->
-          <div class="h-px bg-gray-100 mx-0 mt-1"></div>
+          <div class="h-px bg-gray-100 mx-0 mt-0 px-0"></div>
 
           <!-- Card Footer -->
-          <div class="p-4 sm:p-5 pt-2 grid grid-cols-2 min-[450px]:grid-cols-3 gap-2 pb-5 text-left">
+          <div class="px-4 sm:px-5 pt-1.5 pb-5 grid grid-cols-2 min-[450px]:grid-cols-3 gap-2 text-left">
             <div class="flex flex-col gap-1.5 sm:gap-2">
               <span class="text-[12px] sm:text-[14px] font-bold text-[#333]">Status</span>
               <span :class="getStatusBadgeClass(user.status)">{{ user.status }}</span>
