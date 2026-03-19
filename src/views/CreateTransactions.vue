@@ -1,8 +1,8 @@
 <template>
   <AdminLayout>
     <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
-      <div class="flex items-center justify-between px-2 mb-2">
-        <div class="flex items-center gap-8 border-b border-gray-100 flex-1">
+      <div class="flex flex-col md:flex-row items-stretch md:items-end justify-between px-2 mb-2 gap-4">
+        <div class="flex items-center justify-center md:justify-start gap-8 border-b border-gray-100 flex-1">
           <button 
             @click="activeTab = 'income'"
             :class="activeTab === 'income' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
@@ -18,11 +18,21 @@
             Saídas
           </button>
         </div>
-        <button class="bg-[#005858] text-white px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0 ml-4 mb-3">
+        <button 
+          @click="showModal = true"
+          class="bg-[#005858] text-white px-6 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
+        >
           <Plus :size="18" stroke-width="3" />
           Criar transação
         </button>
       </div>
+
+      <!-- Registration Modal -->
+      <CreateTransactionModal 
+        :is-open="showModal" 
+        @close="showModal = false"
+        @save="handleSaveTransaction"
+      />
 
       <!-- Content for Entradas Tab -->
       <div v-if="activeTab === 'income'" class="flex flex-col gap-8">
@@ -134,12 +144,14 @@
 
 <script>
 import AdminLayout from '../components/AdminLayout.vue'
+import CreateTransactionModal from '../components/modals/CreateTransactionModal.vue'
 import { Check, RefreshCw, ArrowUpRight, Plus } from 'lucide-vue-next'
 
 export default {
   name: 'CreateTransactionsView',
   components: {
     AdminLayout,
+    CreateTransactionModal,
     Check,
     RefreshCw,
     ArrowUpRight,
@@ -149,6 +161,7 @@ export default {
     return {
       activeTab: 'income',
       currentPage: 1,
+      showModal: false,
       kpisRow1: [
         { label: 'Aprovadas (Total)', value: 1259, icon: 'Check' },
         { label: 'Aprovadas (Hoje)', value: 0, icon: 'Check' },
@@ -177,6 +190,38 @@ export default {
         { id: 14, userId: 'Marcha', txId: 'm1n2o3p4-q5r6-s7t8-u9v0-w1x2y3z4a5b6', value: 250.00, netValue: 242.50, status: 'Pendente', date: '01/01/2026 às 16:45:00', fee: 7.50 },
         { id: 15, userId: 'Fernandamegahair', txId: 'p9o8i7u6-y5t4-r3e2-w1q0-l9k8j7h6g5f4', value: 50.00, netValue: 48.50, status: 'Pendente', date: '01/01/2026 às 10:05:12', fee: 1.50 }
       ]
+    }
+  },
+  methods: {
+    handleSaveTransaction(newTx) {
+      const now = new Date()
+      const formattedDate = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      
+      const transaction = {
+        id: this.transactions.length + 1,
+        userId: newTx.userId,
+        txId: Math.random().toString(36).substring(2, 15) + '-' + Math.random().toString(36).substring(2, 15),
+        value: newTx.value,
+        netValue: newTx.value * 0.93, // Simulating a fixed fee for demo
+        status: newTx.status,
+        date: formattedDate,
+        fee: newTx.value * 0.07 // Simulating a fee
+      }
+
+      this.transactions.unshift(transaction)
+      this.showModal = false
+      
+      // Focus on the tab of the new transaction
+      this.activeTab = newTx.type
+      
+      // Update KPIs if approved
+      if (newTx.status === 'Aprovada') {
+        const kpiIndexTotal = this.kpisRow1.findIndex(k => k.label === 'Aprovadas (Total)')
+        if (kpiIndexTotal !== -1) this.kpisRow1[kpiIndexTotal].value++
+
+        const kpiIndexGross = this.kpisRow2.findIndex(k => k.label === 'Aprovadas (Bruto)')
+        if (kpiIndexGross !== -1) this.kpisRow2[kpiIndexGross].value += newTx.value
+      }
     }
   },
   computed: {
