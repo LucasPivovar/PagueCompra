@@ -56,29 +56,6 @@
         </div>
       </div>
 
-      <!-- Settings Submenu -->
-      <div class="px-3 mb-6">
-        <div v-show="!isCollapsed" class="px-4 flex justify-between items-center cursor-pointer mb-2 text-gray-400 hover:text-[#333] transition-all" @click="activeMenu = activeMenu === 'settings' ? null : 'settings'">
-          <span class="text-[11px] font-bold uppercase tracking-widest text-left">Configurações</span>
-          <ChevronDown :size="14" class="transition-transform duration-200" :class="{ 'rotate-180': activeMenu === 'settings' }" />
-        </div>
-        
-        <div v-show="activeMenu === 'settings' && !isCollapsed" class="flex flex-col gap-1 mt-1">
-          <router-link to="/settings/general" class="nav-item group text-gray-500">
-             <Globe :size="18" class="flex-shrink-0" />
-             <span class="text-[13px] font-bold">Gerais</span>
-          </router-link>
-          <router-link to="/settings/levels" class="nav-item group text-gray-500">
-             <Layers :size="18" class="flex-shrink-0" />
-             <span class="text-[13px] font-bold">Níveis</span>
-          </router-link>
-          <router-link to="/settings/acquirer" class="nav-item group text-gray-500">
-             <CreditCard :size="18" class="flex-shrink-0" />
-             <span class="text-[13px] font-bold">Adquirente</span>
-          </router-link>
-        </div>
-      </div>
-
       <!-- Profile Section at Bottom - Mobile only (desktop has it in navbar) -->
       <div class="lg:hidden mt-auto px-3 mb-6 pt-6 border-t border-gray-100">
         <div class="flex items-center p-2 rounded-xl transition-all duration-200" :class="isCollapsed ? 'justify-center px-0' : 'gap-3 px-4 hover:bg-gray-50'">
@@ -98,10 +75,8 @@
 <script>
 import { 
   LayoutDashboard, Users, CheckCircle2, 
-  ChevronDown, Globe,
-  CreditCard, 
+  ChevronDown, 
   Wallet,
-  Layers,
   PlusCircle
 } from 'lucide-vue-next'
 
@@ -110,11 +85,7 @@ export default {
   emits: ['toggle-sidebar'],
   components: {
     LayoutDashboard, Users, CheckCircle2, 
-    ChevronDown, Globe,
-    CreditCard,
-    Wallet,
-    Layers,
-    PlusCircle
+    ChevronDown, Wallet, PlusCircle
   },
   props: {
     isCollapsed: {

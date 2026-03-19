@@ -30,24 +30,6 @@ const routes = [
     name: 'Wallets',
     component: () => import('../views/submenu/Wallets.vue'),
     meta: { title: 'Carteiras' }
-  },
-  {
-    path: '/settings/general',
-    name: 'SettingsGeneral',
-    component: () => import('../views/submenu/SettingsGeneral.vue'),
-    meta: { title: 'Configurações Gerais' }
-  },
-  {
-    path: '/settings/levels',
-    name: 'SettingsLevels',
-    component: () => import('../views/submenu/SettingsLevels.vue'),
-    meta: { title: 'Níveis' }
-  },
-  {
-    path: '/settings/acquirer',
-    name: 'SettingsAcquirer',
-    component: () => import('../views/submenu/SettingsAcquirer.vue'),
-    meta: { title: 'Adquirentes' }
   }
 ]
 

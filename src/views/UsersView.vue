@@ -38,7 +38,7 @@
 
       <!-- Users Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 items-start">
-        <div v-for="user in filteredUsers" :key="user.id" class="bg-white rounded-[20px] shadow-sm border border-gray-300 overflow-hidden flex flex-col group hover:shadow-md transition-all relative font-poppins text-left">
+        <div v-for="user in filteredUsers" :key="user.id" class="bg-white rounded-[20px] shadow-sm border border-gray-300 flex flex-col group hover:shadow-md transition-all relative font-poppins text-left">
           <!-- Card Body -->
           <div class="p-4 sm:p-5 pb-0">
             <!-- User Header Row -->

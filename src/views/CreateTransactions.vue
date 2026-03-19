@@ -1,21 +1,26 @@
 <template>
   <AdminLayout>
     <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
-      <!-- Tabs Header -->
-      <div class="flex items-center gap-8 px-2 border-b border-gray-100 mb-2">
-        <button 
-          @click="activeTab = 'income'"
-          :class="activeTab === 'income' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
-          class="pb-4 text-lg font-black transition-all cursor-pointer"
-        >
-          Entradas
-        </button>
-        <button 
-          @click="activeTab = 'outcome'"
-          :class="activeTab === 'outcome' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
-          class="pb-4 text-lg font-black transition-all cursor-pointer"
-        >
-          Saídas
+      <div class="flex items-center justify-between px-2 mb-2">
+        <div class="flex items-center gap-8 border-b border-gray-100 flex-1">
+          <button 
+            @click="activeTab = 'income'"
+            :class="activeTab === 'income' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
+            class="pb-4 text-lg font-black transition-all cursor-pointer"
+          >
+            Entradas
+          </button>
+          <button 
+            @click="activeTab = 'outcome'"
+            :class="activeTab === 'outcome' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
+            class="pb-4 text-lg font-black transition-all cursor-pointer"
+          >
+            Saídas
+          </button>
+        </div>
+        <button class="bg-[#005858] text-white px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0 ml-4 mb-3">
+          <Plus :size="18" stroke-width="3" />
+          Criar transação
         </button>
       </div>
 
@@ -129,7 +134,7 @@
 
 <script>
 import AdminLayout from '../components/AdminLayout.vue'
-import { Check, RefreshCw, ArrowUpRight } from 'lucide-vue-next'
+import { Check, RefreshCw, ArrowUpRight, Plus } from 'lucide-vue-next'
 
 export default {
   name: 'CreateTransactionsView',
@@ -137,7 +142,8 @@ export default {
     AdminLayout,
     Check,
     RefreshCw,
-    ArrowUpRight
+    ArrowUpRight,
+    Plus
   },
   data() {
     return {
