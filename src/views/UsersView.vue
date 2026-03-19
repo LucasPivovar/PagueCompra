@@ -107,10 +107,10 @@
           </div>
 
           <!-- Divider -->
-          <div class="h-px bg-gray-100 mx-0 mt-3"></div>
+          <div class="h-px bg-gray-100 mx-0 mt-1"></div>
 
           <!-- Card Footer -->
-          <div class="p-4 sm:p-5 pt-4 grid grid-cols-2 min-[450px]:grid-cols-3 gap-2 pb-5 text-left">
+          <div class="p-4 sm:p-5 pt-2 grid grid-cols-2 min-[450px]:grid-cols-3 gap-2 pb-5 text-left">
             <div class="flex flex-col gap-1.5 sm:gap-2">
               <span class="text-[12px] sm:text-[14px] font-bold text-[#333]">Status</span>
               <span :class="getStatusBadgeClass(user.status)">{{ user.status }}</span>
