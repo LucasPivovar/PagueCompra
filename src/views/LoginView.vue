@@ -115,9 +115,9 @@ export default {
         this.isLoading = false
         this.showToast('Login realizado com sucesso! Redirecionando...')
         
-        // Redirect to dashboard after a short delay
+        // Redirect to 2FA after a short delay
         setTimeout(() => {
-          this.$router.push('/')
+          this.$router.push('/2fa')
         }, 1500)
       }, 1500)
     }
