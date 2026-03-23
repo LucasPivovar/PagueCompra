@@ -78,12 +78,17 @@
 <script>
 import AdminLayout from '../../components/AdminLayout.vue'
 import { Save, Globe, Activity } from 'lucide-vue-next'
+import { useToast } from '../../composables/useToast'
 
 export default {
   name: 'SettingsGeneralView',
   components: {
     AdminLayout,
     Save, Globe, Activity
+  },
+  setup() {
+    const { showToast } = useToast()
+    return { showToast }
   },
   data() {
     return {
@@ -98,7 +103,7 @@ export default {
   methods: {
     saveSettings() {
       // Logic to save settings
-      alert('Configurações salvas com sucesso!')
+      this.showToast('Configurações salvas com sucesso!', 'success')
     }
   }
 }

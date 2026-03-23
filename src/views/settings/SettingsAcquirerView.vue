@@ -78,12 +78,17 @@
 <script>
 import AdminLayout from '../../components/AdminLayout.vue'
 import { Zap, Lock, Eye, EyeOff, Link as LinkIcon, AlertCircle } from 'lucide-vue-next'
+import { useToast } from '../../composables/useToast'
 
 export default {
   name: 'SettingsAcquirerView',
   components: {
     AdminLayout,
     Zap, Lock, Eye, EyeOff, LinkIcon, AlertCircle
+  },
+  setup() {
+    const { showToast } = useToast()
+    return { showToast }
   },
   data() {
     return {
@@ -98,7 +103,7 @@ export default {
   methods: {
     saveIntegration() {
       // Mock test
-      alert('Teste de conexão realizado com sucesso!')
+      this.showToast('Teste de conexão realizado com sucesso!', 'success')
     }
   }
 }

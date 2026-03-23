@@ -36,10 +36,27 @@
         </span>
       </button>
 
-      <!-- Desktop Admin Avatar (icon only, no name/role) -->
-      <div class="hidden lg:flex items-center pl-2 border-l border-gray-100 ml-1">
-        <div class="w-9 h-9 rounded-full bg-[#005858] flex items-center justify-center text-white font-bold text-sm shadow-sm cursor-pointer hover:opacity-90 transition-opacity">
+      <!-- Dropdown Overlay for click-outside relative to fixed navbar -->
+      <div v-if="showDropdown" @click="showDropdown = false" class="fixed inset-0 z-40"></div>
+
+      <!-- Desktop Admin Avatar (with dropdown) -->
+      <div class="hidden lg:flex items-center pl-2 border-l border-gray-100 ml-1 relative">
+        <div 
+          @click="showDropdown = !showDropdown"
+          class="w-9 h-9 rounded-full bg-[#005858] flex items-center justify-center text-white font-bold text-sm shadow-sm cursor-pointer hover:opacity-90 transition-opacity select-none z-50">
           AD
+        </div>
+        
+        <!-- Dropdown Menu -->
+        <div 
+          v-show="showDropdown"
+          class="absolute right-0 top-12 w-36 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 z-50">
+          <button 
+            @click="logout"
+            class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 font-semibold flex items-center gap-2 text-sm transition-colors cursor-pointer">
+            <LogOut :size="16" />
+            Sair
+          </button>
         </div>
       </div>
 
@@ -55,7 +72,7 @@
 </template>
 
 <script>
-import { Menu, ChevronLeft, ChevronRight, Bell } from 'lucide-vue-next'
+import { Menu, ChevronLeft, ChevronRight, Bell, LogOut } from 'lucide-vue-next'
 
 export default {
   name: 'AdminNavbar',
@@ -64,7 +81,8 @@ export default {
     Menu,
     ChevronLeft,
     ChevronRight,
-    Bell
+    Bell,
+    LogOut
   },
   props: {
     isCollapsed: {
@@ -74,6 +92,17 @@ export default {
     notificationCount: {
       type: Number,
       default: 0
+    }
+  },
+  data() {
+    return {
+      showDropdown: false
+    }
+  },
+  methods: {
+    logout() {
+      this.showDropdown = false
+      this.$router.push('/login')
     }
   }
 }
