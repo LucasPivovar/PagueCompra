@@ -69,13 +69,6 @@
             {{ isLoading ? 'Entrando...' : 'Entrar na conta' }}
           </button>
         </form>
-
-        <div class="mt-6 sm:mt-8 text-center pt-5 sm:pt-6 border-t border-dashed border-gray-200">
-          <p class="text-[13px] sm:text-sm text-gray-500 font-medium">
-            Não tem uma conta? 
-            <a href="#" class="text-[#005858] font-bold hover:underline">Solicitar acesso</a>
-          </p>
-        </div>
       </div>
 
       <!-- Footer Tags -->
