@@ -9,7 +9,7 @@
         </div>
 
         <div class="mb-6 sm:mb-8 text-center">
-          <h1 class="text-xl sm:text-2xl font-black text-[#333] mb-1.5 sm:mb-2">Autenticação 2F</h1>
+          <h1 class="text-xl sm:text-2xl font-black text-[#333] mb-1.5 sm:mb-2">Autenticação de Dois Fatores</h1>
           <p class="text-[13px] sm:text-[15px] leading-relaxed text-gray-500 font-medium">
             Digite o código de 6 dígitos gerado pelo seu <br class="hidden sm:block"/>
             aplicativo autenticador ou enviado por e-mail.
@@ -135,7 +135,7 @@ export default {
       // Simulating API call
       setTimeout(() => {
         this.isLoading = false
-        this.showToast('Autenticado com sucesso!')
+        this.showToast('Login realizado com sucesso!', 'success')
         
         // Redirect to dashboard
         setTimeout(() => {

@@ -71,7 +71,7 @@ const routes = [
     path: '/2fa',
     name: 'TwoFactor',
     component: () => import('../views/TwoFactorView.vue'),
-    meta: { title: 'Autenticação 2F' }
+    meta: { title: '2FA' }
   }
 
 ]

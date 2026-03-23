@@ -113,12 +113,7 @@ export default {
       // Simulating API call
       setTimeout(() => {
         this.isLoading = false
-        this.showToast('Login realizado com sucesso! Redirecionando...')
-        
-        // Redirect to 2FA after a short delay
-        setTimeout(() => {
-          this.$router.push('/2fa')
-        }, 1500)
+        this.$router.push('/2fa')
       }, 1500)
     }
   }
