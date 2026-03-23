@@ -33,26 +33,65 @@
             <span v-if="!isCollapsed" class="font-bold text-[14px]">Saques</span>
           </router-link>
 
-          <router-link to="/financial/create-transactions" class="nav-item group">
-            <PlusCircle :size="20" class="flex-shrink-0" />
-            <span v-if="!isCollapsed" class="font-bold text-[14px]">Criar Transações</span>
-          </router-link>
-        </div>
-      </div>
+          <!-- Transactions Items -->
+          <div class="flex flex-col gap-1">
+            <div 
+              class="nav-item group text-gray-400 hover:text-[#333] transition-all cursor-pointer" 
+              @click.stop="activeSubMenu = activeSubMenu === 'transactions' ? null : 'transactions'"
+            >
+              <Repeat :size="20" class="flex-shrink-0" />
+              <span v-if="!isCollapsed" class="font-bold text-[14px]">Transações</span>
+              <ChevronDown v-if="!isCollapsed" :size="14" class="ml-auto transition-transform duration-200" :class="{ 'rotate-180': activeSubMenu === 'transactions' }" />
+            </div>
+            
+            <div v-show="activeSubMenu === 'transactions' && !isCollapsed" class="flex flex-col gap-1 ml-6 border-l border-gray-100 pl-2">
+              <router-link to="/financial/transactions/income" class="nav-item group text-gray-500 py-2">
+                 <ArrowDownCircle :size="16" class="flex-shrink-0" />
+                 <span class="text-[12px] font-bold">Entradas</span>
+              </router-link>
+              <router-link to="/financial/transactions/outcome" class="nav-item group text-gray-500 py-2">
+                 <ArrowUpCircle :size="16" class="flex-shrink-0" />
+                 <span class="text-[12px] font-bold">Saídas</span>
+              </router-link>
+            </div>
+          </div>
 
+          <!-- Finance Section -->
+          <div class="mt-4 mb-2">
+            <span v-if="!isCollapsed" class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-left block mb-2">Financeiro</span>
+            <router-link to="/financial/wallets" class="nav-item group text-gray-500">
+               <Wallet :size="20" class="flex-shrink-0" />
+               <span v-if="!isCollapsed" class="font-bold text-[14px]">Carteiras</span>
+            </router-link>
+          </div>
 
-      <!-- Financial Submenu -->
-      <div class="px-3 mb-6">
-        <div v-show="!isCollapsed" class="px-4 flex justify-between items-center cursor-pointer mb-2 text-gray-400 hover:text-[#333] transition-all" @click="activeMenu = activeMenu === 'finance' ? null : 'finance'">
-          <span class="text-[11px] font-bold uppercase tracking-widest">Financeiro</span>
-          <ChevronDown :size="14" class="transition-transform duration-200" :class="{ 'rotate-180': activeMenu === 'finance' }" />
-        </div>
-        
-        <div v-show="activeMenu === 'finance' && !isCollapsed" class="flex flex-col gap-1 mt-1">
-          <router-link to="/financial/wallets" class="nav-item group text-gray-500">
-             <Wallet :size="18" class="flex-shrink-0" />
-             <span class="text-[13px] font-bold">Carteiras</span>
-          </router-link>
+          <!-- Settings Section -->
+          <div class="flex flex-col gap-1">
+            <div 
+              class="nav-item group text-gray-400 hover:text-[#333] transition-all cursor-pointer" 
+              @click.stop="activeSubMenu = activeSubMenu === 'settings' ? null : 'settings'"
+              :class="{ 'router-link-active': $route.path.startsWith('/settings') }"
+            >
+              <Settings2 :size="20" class="flex-shrink-0" />
+              <span v-if="!isCollapsed" class="font-bold text-[14px]">Configurações</span>
+              <ChevronDown v-if="!isCollapsed" :size="14" class="ml-auto transition-transform duration-200" :class="{ 'rotate-180': activeSubMenu === 'settings' }" />
+            </div>
+            
+            <div v-show="activeSubMenu === 'settings' && !isCollapsed" class="flex flex-col gap-1 ml-6 border-l border-gray-100 pl-2">
+              <router-link to="/settings/general" class="nav-item group text-gray-500 py-2">
+                 <Sliders :size="16" class="flex-shrink-0" />
+                 <span class="text-[12px] font-bold">Gerais</span>
+              </router-link>
+              <router-link to="/settings/levels" class="nav-item group text-gray-500 py-2">
+                 <ShieldCheck :size="16" class="flex-shrink-0" />
+                 <span class="text-[12px] font-bold">Níveis</span>
+              </router-link>
+              <router-link to="/settings/acquirer" class="nav-item group text-gray-500 py-2">
+                 <Zap :size="16" class="flex-shrink-0" />
+                 <span class="text-[12px] font-bold">Adquirente</span>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -77,7 +116,10 @@ import {
   LayoutDashboard, Users, CheckCircle2, 
   ChevronDown, 
   Wallet,
-  PlusCircle
+  ArrowDownCircle,
+  ArrowUpCircle,
+  Repeat,
+  Settings2, Sliders, ShieldCheck, Zap
 } from 'lucide-vue-next'
 
 export default {
@@ -85,7 +127,8 @@ export default {
   emits: ['toggle-sidebar'],
   components: {
     LayoutDashboard, Users, CheckCircle2, 
-    ChevronDown, Wallet, PlusCircle
+    ChevronDown, Wallet, ArrowDownCircle, ArrowUpCircle, Repeat,
+    Settings2, Sliders, ShieldCheck, Zap
   },
   props: {
     isCollapsed: {
@@ -95,7 +138,8 @@ export default {
   },
   data() {
     return {
-      activeMenu: 'finance'
+      activeMenu: 'finance',
+      activeSubMenu: null
     }
   }
 }

@@ -6,7 +6,7 @@
       </div>
       
       <div class="px-4">
-        <div class="bg-white p-6 rounded-[12px] shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100">
+        <div class="bg-white p-6 rounded-[24px] shadow-sm border border-gray-200">
           <!-- Filters Section - Right Aligned -->
           <div class="flex flex-col sm:flex-row justify-end items-center mb-6 gap-3">
             <!-- Search -->
@@ -15,7 +15,7 @@
                 type="text" 
                 v-model="searchQuery"
                 placeholder="Pesquisar..." 
-                class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl text-sm font-bold text-gray-600 focus:outline-none focus:border-[#005858] transition-all hover:border-gray-300 shadow-sm shadow-gray-100" 
+                class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm font-bold text-gray-600 focus:outline-none focus:border-[#005858] transition-all hover:border-gray-300 shadow-sm" 
               />
               <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
                 <Search :size="16" />
@@ -24,7 +24,7 @@
 
             <!-- Date Filter -->
             <div class="relative w-full sm:w-[160px]">
-              <select v-model="filterDate" class="w-full pl-10 pr-8 py-2 bg-white border border-gray-200 rounded-xl text-[13px] font-bold text-gray-600 focus:outline-none focus:border-[#005858] appearance-none cursor-pointer transition-all hover:border-gray-300 shadow-sm">
+              <select v-model="filterDate" class="w-full pl-10 pr-8 py-2.5 bg-white border border-gray-200 rounded-xl text-[13px] font-bold text-gray-600 focus:outline-none focus:border-[#005858] appearance-none cursor-pointer transition-all hover:border-gray-300 shadow-sm">
                 <option value="all">Tudo</option>
                 <option value="today">Hoje</option>
                 <option value="week">Esta semana</option>
@@ -41,53 +41,53 @@
           </div>
           
           <div class="overflow-x-auto min-h-[400px]">
-            <table class="w-full text-left text-[13px] whitespace-nowrap">
-              <thead class="text-[#333] border-b border-gray-100">
+            <table class="w-full text-left text-[13px] whitespace-nowrap border-collapse">
+              <thead class="text-gray-400 border-b border-gray-50 uppercase tracking-wider text-[11px]">
                 <tr>
-                  <th class="py-3 px-4 font-bold">Cliente ID</th>
-                  <th class="py-3 px-4 font-bold">Transação ID</th>
-                  <th class="py-3 px-4 font-bold">Chave PIX</th>
-                  <th class="py-3 px-4 font-bold">Valor Total</th>
-                  <th class="py-3 px-4 font-bold">Valor Liquido</th>
-                  <th class="py-3 px-4 font-bold">Status</th>
-                  <th class="py-3 px-4 font-bold">Data</th>
-                  <th class="py-3 px-4 font-bold text-center">Ações</th>
+                  <th class="py-4 px-4 font-bold">Cliente ID</th>
+                  <th class="py-4 px-4 font-bold">Transação ID</th>
+                  <th class="py-4 px-4 font-bold">Chave PIX</th>
+                  <th class="py-4 px-4 font-bold">Valor Total</th>
+                  <th class="py-4 px-4 font-bold">Valor Liquido</th>
+                  <th class="py-4 px-4 font-bold">Status</th>
+                  <th class="py-4 px-4 font-bold">Data</th>
+                  <th class="py-4 px-4 font-bold text-center">Ações</th>
                 </tr>
               </thead>
-              <tbody class="text-gray-600">
+              <tbody class="text-[#333]">
                 <tr v-for="withdrawal in currentWithdrawals" :key="withdrawal.id" class="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
-                  <td class="py-4 px-4">{{ withdrawal.clientId || '---' }}</td>
-                  <td class="py-4 px-4 font-mono text-[11px] text-gray-400">{{ withdrawal.transactionId }}</td>
-                  <td class="py-4 px-4">{{ withdrawal.pixKey }}</td>
-                  <td class="py-4 px-4 font-bold text-gray-700">{{ withdrawal.totalValue }}</td>
-                  <td class="py-4 px-4 font-bold text-[#005858]">{{ withdrawal.netValue }}</td>
+                  <td class="py-4 px-4 font-bold">{{ withdrawal.clientId || '---' }}</td>
+                  <td class="py-4 px-4 font-medium text-[11px] text-gray-400">{{ withdrawal.transactionId }}</td>
+                  <td class="py-4 px-4 font-medium">{{ withdrawal.pixKey }}</td>
+                  <td class="py-4 px-4 font-black">R$ {{ withdrawal.totalValue.replace('R$ ', '') }}</td>
+                  <td class="py-4 px-4 font-black text-[#005858]">R$ {{ withdrawal.netValue.replace('R$ ', '') }}</td>
                   <td class="py-4 px-4">
                     <span :class="{
                       'bg-amber-50 text-amber-600 border border-amber-200': withdrawal.status === 'Pendente',
                       'bg-emerald-50 text-emerald-600 border border-emerald-200': withdrawal.status === 'Aprovado',
                       'bg-rose-50 text-rose-600 border border-rose-200': withdrawal.status === 'Rejeitado'
-                    }" class="px-2.5 py-1 rounded-lg inline-block text-[10px] font-bold uppercase tracking-wider">
+                    }" class="px-2.5 py-1 rounded-lg inline-block text-[10px] font-black uppercase tracking-wider">
                       {{ withdrawal.status }}
                     </span>
                   </td>
-                  <td class="py-4 px-4 text-gray-400">{{ withdrawal.date }}</td>
+                  <td class="py-4 px-4 text-gray-400 font-medium">{{ withdrawal.date }}</td>
                   <td class="py-4 px-4">
                     <div class="flex gap-2 justify-center" v-if="withdrawal.status === 'Pendente'">
                       <button 
                         @click="updateStatus(withdrawal, 'Aprovado')"
-                        class="bg-[#28A745] hover:bg-[#218838] text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all hover:scale-105 active:scale-95 shadow-sm shadow-emerald-100 cursor-pointer"
+                        class="bg-[#005858] text-white px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all hover:scale-105 active:scale-95 shadow-md shadow-green-900/10 cursor-pointer"
                       >
                         Aprovar
                       </button>
                       <button 
                         @click="updateStatus(withdrawal, 'Rejeitado')"
-                        class="bg-[#DC3545] hover:bg-[#C82333] text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all hover:scale-105 active:scale-95 shadow-sm shadow-rose-100 cursor-pointer"
+                        class="bg-white border border-gray-200 text-gray-400 hover:text-rose-600 hover:border-rose-200 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
                       >
                         Rejeitar
                       </button>
                     </div>
-                    <div v-else class="text-center text-gray-300 text-[11px] italic font-medium">
-                      Finalizado
+                    <div v-else class="text-center text-gray-300 text-[11px] italic font-bold">
+                      FINALIZADO
                     </div>
                   </td>
                 </tr>
@@ -96,7 +96,7 @@
           </div>
           
           <!-- Pagination -->
-          <div v-if="filteredWithdrawals.length > 10" class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6 pt-4 border-t border-gray-100">
+          <div v-if="filteredWithdrawals.length > 10" class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6 pt-8 border-t border-gray-50">
             <span class="text-sm font-medium text-gray-400">Mostrando {{ currentWithdrawals.length }} de {{ filteredWithdrawals.length }} saques</span>
             <div class="flex flex-wrap justify-center gap-2">
               <button @click="currentPage = Math.max(1, currentPage - 1)" class="pagination-btn" :disabled="currentPage === 1">Anterior</button>

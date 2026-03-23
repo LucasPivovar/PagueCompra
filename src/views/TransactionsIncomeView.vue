@@ -3,20 +3,11 @@
     <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
       <div class="flex flex-col md:flex-row items-stretch md:items-end justify-between px-2 mb-2 gap-4">
         <div class="flex items-center justify-center md:justify-start gap-8 border-b border-gray-100 flex-1">
-          <button 
-            @click="activeTab = 'income'"
-            :class="activeTab === 'income' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
-            class="pb-4 text-lg font-black transition-all cursor-pointer"
+          <div 
+            class="pb-4 text-lg font-black transition-all text-[#005858] border-b-2 border-[#005858]"
           >
             Entradas
-          </button>
-          <button 
-            @click="activeTab = 'outcome'"
-            :class="activeTab === 'outcome' ? 'text-[#005858] border-b-2 border-[#005858]' : 'text-gray-400 hover:text-gray-600'"
-            class="pb-4 text-lg font-black transition-all cursor-pointer"
-          >
-            Saídas
-          </button>
+          </div>
         </div>
         <button 
           @click="showModal = true"
@@ -35,7 +26,7 @@
       />
 
       <!-- Content for Entradas Tab -->
-      <div v-if="activeTab === 'income'" class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8">
         <!-- Top KPI Cards Row 1 -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2">
           <div v-for="kpi in kpisRow1" :key="kpi.label" class="bg-white p-5 rounded-[20px] border border-gray-200 border-l-4 border-l-[#166534] flex justify-between items-center shadow-sm">
@@ -127,17 +118,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Content for Saídas Tab -->
-      <div v-else class="px-2 py-10 text-center">
-        <div class="bg-white p-12 rounded-[24px] border border-dashed border-gray-300">
-          <div class="text-gray-300 mb-4 flex justify-center">
-            <ArrowUpRight :size="48" />
-          </div>
-          <h3 class="text-xl font-black text-gray-400">Relatório de Saídas</h3>
-          <p class="text-gray-400 mt-2">Esta funcionalidade está sendo preparada.</p>
-        </div>
-      </div>
     </div>
   </AdminLayout>
 </template>
@@ -145,21 +125,19 @@
 <script>
 import AdminLayout from '../components/AdminLayout.vue'
 import CreateTransactionModal from '../components/modals/CreateTransactionModal.vue'
-import { Check, RefreshCw, ArrowUpRight, Plus } from 'lucide-vue-next'
+import { Check, RefreshCw, Plus } from 'lucide-vue-next'
 
 export default {
-  name: 'CreateTransactionsView',
+  name: 'TransactionsIncomeView',
   components: {
     AdminLayout,
     CreateTransactionModal,
     Check,
     RefreshCw,
-    ArrowUpRight,
     Plus
   },
   data() {
     return {
-      activeTab: 'income',
       currentPage: 1,
       showModal: false,
       kpisRow1: [
@@ -194,6 +172,8 @@ export default {
   },
   methods: {
     handleSaveTransaction(newTx) {
+      if (newTx.type !== 'income') return
+
       const now = new Date()
       const formattedDate = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       
@@ -210,9 +190,6 @@ export default {
 
       this.transactions.unshift(transaction)
       this.showModal = false
-      
-      // Focus on the tab of the new transaction
-      this.activeTab = newTx.type
       
       // Update KPIs if approved
       if (newTx.status === 'Aprovada') {
