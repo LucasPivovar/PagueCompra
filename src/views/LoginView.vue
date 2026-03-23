@@ -71,12 +71,6 @@
         </form>
       </div>
 
-      <!-- Footer Tags -->
-      <div class="mt-8 flex justify-center gap-6 text-[13px] font-bold text-gray-400">
-        <a href="#" class="hover:text-[#005858] transition-colors">Termos</a>
-        <a href="#" class="hover:text-[#005858] transition-colors">Privacidade</a>
-        <a href="#" class="hover:text-[#005858] transition-colors">Suporte</a>
-      </div>
     </div>
   </div>
 </template>
