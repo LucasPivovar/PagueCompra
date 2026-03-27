@@ -1,23 +1,24 @@
 <template>
   <aside class="sidebar" :class="{ 'collapsed': isCollapsed }">
-    <nav class="sidebar-nav py-6 font-poppins flex-1 overflow-y-auto overflow-x-hidden bg-white border-r border-dashed border-[#cbd5e1] transition-all duration-300 flex flex-col">
+    <nav class="sidebar-nav py-4 font-poppins flex-1 overflow-y-auto overflow-x-hidden bg-white border-r border-dashed border-[#cbd5e1] transition-all duration-300 flex flex-col">
       <!-- Goal Progress Section -->
       <div v-show="!isCollapsed" class="px-7 mb-8 transition-all duration-300">
         <div class="flex justify-between items-center mb-2">
-          <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Meta Mensal</span>
-          <span class="text-[10px] font-bold text-[#005858]">0%</span>
+          <span class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Meta Mensal</span>
+          <span class="text-[10px] font-black text-[#005858]">0%</span>
         </div>
-        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden mb-2">
-          <div class="bg-[#005858] h-full rounded-full transition-all duration-500" style="width: 5%"></div>
+        <div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden mb-2">
+          <div class="bg-[#005858] h-full rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(0,88,88,0.3)]" style="width: 5%"></div>
         </div>
         <div class="text-[11px] font-bold text-gray-400">
-          R$ 0,00 <span class="text-gray-300 mx-1">/</span> R$ 10.000,00
+          R$ 0,00 <span class="text-gray-300 mx-1">/</span> <span class="text-[#333]">R$ 10.000,00</span>
         </div>
       </div>
 
-      <div class="px-3 mb-6">
-        <span v-if="!isCollapsed" class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-left block mb-4">Administração</span>
+      <div class="px-3 flex flex-col gap-8">
+        <!-- Dashboard & Core Management -->
         <div class="flex flex-col gap-1">
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2">ADMINISTRAÇÃO</span>
           <router-link to="/" class="nav-item group">
             <LayoutDashboard :size="20" class="flex-shrink-0" />
             <span v-if="!isCollapsed" class="font-bold text-[14px]">Visão Geral</span>
@@ -33,77 +34,50 @@
             <span v-if="!isCollapsed" class="font-bold text-[14px]">Saques</span>
           </router-link>
 
-          <!-- Transactions Items -->
-          <div class="flex flex-col gap-1">
-            <div 
-              class="nav-item group text-gray-400 hover:text-[#333] transition-all cursor-pointer" 
-              @click.stop="activeSubMenu = activeSubMenu === 'transactions' ? null : 'transactions'"
-            >
-              <Repeat :size="20" class="flex-shrink-0" />
-              <span v-if="!isCollapsed" class="font-bold text-[14px]">Transações</span>
-              <ChevronDown v-if="!isCollapsed" :size="14" class="ml-auto transition-transform duration-200" :class="{ 'rotate-180': activeSubMenu === 'transactions' }" />
-            </div>
-            
-            <div v-show="activeSubMenu === 'transactions' && !isCollapsed" class="flex flex-col gap-1 ml-6 border-l border-gray-100 pl-2">
-              <router-link to="/financial/transactions/income" class="nav-item group text-gray-500 py-2">
-                 <ArrowDownCircle :size="16" class="flex-shrink-0" />
-                 <span class="text-[12px] font-bold">Entradas</span>
-              </router-link>
-              <router-link to="/financial/transactions/outcome" class="nav-item group text-gray-500 py-2">
-                 <ArrowUpCircle :size="16" class="flex-shrink-0" />
-                 <span class="text-[12px] font-bold">Saídas</span>
-              </router-link>
-            </div>
-          </div>
+          <!-- Carteiras (Moved here directly) -->
+          <router-link to="/financial/wallets" class="nav-item group">
+            <Wallet :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Carteiras</span>
+          </router-link>
 
-          <!-- Finance Section -->
-          <div class="mt-4 mb-2">
-            <span v-if="!isCollapsed" class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-left block mb-2">Financeiro</span>
-            <router-link to="/financial/wallets" class="nav-item group text-gray-500">
-               <Wallet :size="20" class="flex-shrink-0" />
-               <span v-if="!isCollapsed" class="font-bold text-[14px]">Carteiras</span>
-            </router-link>
-          </div>
+          <!-- Transactions Items (Flat instead of dropdown) -->
+          <router-link to="/financial/transactions/income" class="nav-item group">
+             <ArrowDownCircle :size="20" class="flex-shrink-0" />
+             <span v-if="!isCollapsed" class="font-bold text-[14px]">Entradas</span>
+          </router-link>
+          <router-link to="/financial/transactions/outcome" class="nav-item group">
+             <ArrowUpCircle :size="20" class="flex-shrink-0" />
+             <span v-if="!isCollapsed" class="font-bold text-[14px]">Saídas</span>
+          </router-link>
+        </div>
 
-          <!-- Settings Section -->
-          <div class="flex flex-col gap-1">
-            <div 
-              class="nav-item group text-gray-400 hover:text-[#333] transition-all cursor-pointer" 
-              @click.stop="activeSubMenu = activeSubMenu === 'settings' ? null : 'settings'"
-              :class="{ 'router-link-active': $route.path.startsWith('/settings') }"
-            >
-              <Settings2 :size="20" class="flex-shrink-0" />
-              <span v-if="!isCollapsed" class="font-bold text-[14px]">Configurações</span>
-              <ChevronDown v-if="!isCollapsed" :size="14" class="ml-auto transition-transform duration-200" :class="{ 'rotate-180': activeSubMenu === 'settings' }" />
-            </div>
-            
-            <div v-show="activeSubMenu === 'settings' && !isCollapsed" class="flex flex-col gap-1 ml-6 border-l border-gray-100 pl-2">
-              <router-link to="/settings/general" class="nav-item group text-gray-500 py-2">
-                 <Sliders :size="16" class="flex-shrink-0" />
-                 <span class="text-[12px] font-bold">Gerais</span>
-              </router-link>
-              <router-link to="/settings/levels" class="nav-item group text-gray-500 py-2">
-                 <ShieldCheck :size="16" class="flex-shrink-0" />
-                 <span class="text-[12px] font-bold">Níveis</span>
-              </router-link>
-              <router-link to="/settings/acquirer" class="nav-item group text-gray-500 py-2">
-                 <Zap :size="16" class="flex-shrink-0" />
-                 <span class="text-[12px] font-bold">Adquirente</span>
-              </router-link>
-            </div>
-          </div>
+        <!-- Section: Configurações -->
+        <div class="flex flex-col gap-1">
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2 font-poppins">CONFIGURAÇÕES</span>
+          <router-link to="/settings/general" class="nav-item group">
+             <Sliders :size="18" class="flex-shrink-0" />
+             <span v-if="!isCollapsed" class="font-bold text-[14px]">Gerais</span>
+          </router-link>
+          <router-link to="/settings/levels" class="nav-item group">
+             <ShieldCheck :size="18" class="flex-shrink-0" />
+             <span v-if="!isCollapsed" class="font-bold text-[14px]">Níveis</span>
+          </router-link>
+          <router-link to="/settings/acquirer" class="nav-item group">
+             <Zap :size="18" class="flex-shrink-0" />
+             <span v-if="!isCollapsed" class="font-bold text-[14px]">Adquirente</span>
+          </router-link>
         </div>
       </div>
 
-      <!-- Profile Section at Bottom - Mobile only (desktop has it in navbar) -->
-      <div class="lg:hidden mt-auto px-3 mb-6 pt-6 border-t border-gray-100">
-        <div class="flex items-center p-2 rounded-xl transition-all duration-200" :class="isCollapsed ? 'justify-center px-0' : 'gap-3 px-4 hover:bg-gray-50'">
-          <div class="w-10 h-10 rounded-full bg-[#005858] flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
+      <!-- Profile Section at Bottom - Mobile only -->
+      <div class="lg:hidden mt-auto px-3 py-6 border-t border-gray-100 bg-gray-50/50">
+        <div class="flex items-center p-2 rounded-2xl transition-all duration-200" :class="isCollapsed ? 'justify-center px-0' : 'gap-3 px-4'">
+          <div class="w-10 h-10 rounded-full bg-[#005858] flex items-center justify-center text-white font-black text-xs shadow-lg shadow-green-900/20 flex-shrink-0 border-2 border-white">
             AD
           </div>
           <div v-if="!isCollapsed" class="flex flex-col text-left overflow-hidden">
-            <span class="text-[14px] font-bold text-[#333] whitespace-nowrap">Administrador</span>
-            <span class="text-[11px] text-gray-400 font-medium whitespace-nowrap">Super Admin</span>
+            <span class="text-[14px] font-black text-[#333] whitespace-nowrap">Administrador</span>
+            <span class="text-[11px] text-gray-400 font-bold whitespace-nowrap uppercase tracking-wider">Super Admin</span>
           </div>
         </div>
       </div>
@@ -114,12 +88,10 @@
 <script>
 import { 
   LayoutDashboard, Users, CheckCircle2, 
-  ChevronDown, 
   Wallet,
   ArrowDownCircle,
   ArrowUpCircle,
-  Repeat,
-  Settings2, Sliders, ShieldCheck, Zap
+  Sliders, ShieldCheck, Zap
 } from 'lucide-vue-next'
 
 export default {
@@ -127,19 +99,13 @@ export default {
   emits: ['toggle-sidebar'],
   components: {
     LayoutDashboard, Users, CheckCircle2, 
-    ChevronDown, Wallet, ArrowDownCircle, ArrowUpCircle, Repeat,
-    Settings2, Sliders, ShieldCheck, Zap
+    Wallet, ArrowDownCircle, ArrowUpCircle,
+    Sliders, ShieldCheck, Zap
   },
   props: {
     isCollapsed: {
       type: Boolean,
       default: false
-    }
-  },
-  data() {
-    return {
-      activeMenu: 'finance',
-      activeSubMenu: null
     }
   }
 }
@@ -185,7 +151,7 @@ export default {
 }
 
 .nav-item {
-  @apply flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-gray-400 hover:bg-gray-50 hover:text-gray-600 cursor-pointer mx-1 no-underline;
+  @apply flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 text-gray-400 hover:bg-gray-50 hover:text-[#333] cursor-pointer mx-1 no-underline;
 }
 
 .router-link-active {
@@ -199,5 +165,17 @@ export default {
 /* Custom transitions for icons in collapsed mode */
 .sidebar.collapsed .nav-item {
   @apply px-0 mx-1;
+}
+
+/* Custom scrollbar */
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
 }
 </style>

@@ -1,90 +1,260 @@
 <template>
   <AdminLayout>
     <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
-      <div class="flex flex-col md:flex-row items-stretch md:items-end justify-between px-2 mb-2 gap-4">
-        <div class="flex items-center justify-center md:justify-start gap-8 border-b border-gray-100 flex-1">
-          <div 
-            class="pb-4 text-lg font-black transition-all text-[#005858] border-b-2 border-[#005858]"
-          >
-            Configurações do Adquirente
-          </div>
-        </div>
-        <button 
-          @click="saveIntegration"
-          class="bg-[#005858] text-white px-8 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
-        >
-          <Zap :size="18" stroke-width="3" />
-          Testar Conexão
-        </button>
+      <div class="px-2">
+        <h1 class="text-[22px] font-black text-[#333]">Ajuste de adquirentes</h1>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 px-2">
-        <!-- API Credentials Card -->
-        <div class="bg-white p-6 rounded-[24px] border border-gray-200 shadow-sm">
-          <h3 class="text-sm font-black text-[#333] uppercase tracking-wider mb-6 flex items-center gap-2">
-            <Lock :size="18" class="text-[#005858]" />
-            Credenciais da API
-          </h3>
-          
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-1.5">
-              <label class="text-[11px] font-bold text-gray-400 uppercase ml-1">Client ID</label>
-              <input type="text" v-model="acquirer.clientId" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#005858] transition-all" />
-            </div>
-            
-            <div class="flex flex-col gap-1.5">
-              <label class="text-[11px] font-bold text-gray-400 uppercase ml-1">Secret Key</label>
-              <div class="relative">
-                <input :type="showSecret ? 'text' : 'password'" v-model="acquirer.secretKey" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#005858] transition-all pr-12" />
-                <button @click="showSecret = !showSecret" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#005858]">
-                   <Eye v-if="!showSecret" :size="18" />
-                   <EyeOff v-else :size="18" />
-                </button>
+      <div class="flex flex-col gap-8 px-2">
+        <!-- Default Acquirer Selection -->
+        <div class="bg-white rounded-[20px] p-6 border border-gray-200 shadow-sm">
+          <div class="flex flex-col gap-1.5 max-w-sm">
+            <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Adquirente padrão</label>
+            <div class="relative group">
+              <select v-model="defaultAcquirer" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold text-[#333] focus:outline-none focus:border-[#005858] appearance-none cursor-pointer shadow-sm">
+                <option value="ColdFy">ColdFy</option>
+                <option value="Cashtime">Cashtime</option>
+                <option value="Mercado Pago">Mercado Pago</option>
+                <option value="PagarMe">PagarMe</option>
+                <option value="Efí">Efí</option>
+              </select>
+              <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-hover:text-[#005858] transition-colors">
+                <ChevronDown :size="16" stroke-width="3" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Integration Proxy/Webhook Card -->
-        <div class="bg-white p-6 rounded-[24px] border border-gray-200 shadow-sm">
-          <h3 class="text-sm font-black text-[#333] uppercase tracking-wider mb-6 flex items-center gap-2">
-            <LinkIcon :size="18" class="text-[#005858]" />
-            Webhooks & Callbacks
-          </h3>
-          
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-1.5">
-              <label class="text-[11px] font-bold text-gray-400 uppercase ml-1">URL de Notificação</label>
-              <input type="text" v-model="acquirer.webhookUrl" class="w-full bg-gray-100/50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-500 font-mono" readonly />
-              <span class="text-[10px] text-gray-400 ml-1">Copie esta URL e configure no painel do adquirente</span>
-            </div>
-
-            <div class="mt-2 p-4 bg-orange-50 rounded-2xl border border-orange-100">
-              <div class="flex gap-3">
-                <AlertCircle :size="20" class="text-orange-500 shrink-0" />
-                <div class="flex flex-col">
-                  <span class="text-xs font-bold text-orange-700">Atenção</span>
-                  <span class="text-[11px] text-orange-600">Certifique-se de que a Secret Key está correta para evitar falhas no processamento.</span>
+        <!-- Section: ColdFy -->
+        <div class="bg-white rounded-[24px] border border-gray-200 shadow-sm overflow-hidden">
+          <div class="px-8 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center gap-3">
+             <div class="w-2.5 h-2.5 rounded-full bg-[#005858]"></div>
+             <h3 class="text-[14px] font-black text-[#333] uppercase tracking-wider">ColdFy</h3>
+          </div>
+          <div class="p-8">
+            <div class="grid grid-cols-1 gap-6">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Webhook URL</label>
+                <div class="relative">
+                  <input type="text" v-model="coldfy.webhookUrl" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-xs font-mono text-[#005858] focus:outline-none" readonly />
+                  <button @click="copyToClipboard(coldfy.webhookUrl)" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#005858]">
+                    <Copy :size="14" />
+                  </button>
                 </div>
               </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div class="flex flex-col gap-1.5">
+                    <label class="text-[11px] font-bold text-gray-400 ml-1">Secret Key</label>
+                    <input type="password" v-model="coldfy.secretKey" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-[#333] focus:outline-none focus:border-[#005858] transition-all" />
+                 </div>
+                 <div class="flex flex-col gap-1.5">
+                    <label class="text-[11px] font-bold text-gray-400 ml-1">Company ID</label>
+                    <input type="text" v-model="coldfy.companyId" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-[#333] focus:outline-none focus:border-[#005858] transition-all" />
+                 </div>
+              </div>
+
+              <!-- ColdFy Fees -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                 <div class="p-4 rounded-2xl bg-[#f0f9f4] border border-[#d1e7dd]">
+                    <span class="text-[10px] font-black text-[#005858] uppercase tracking-widest block mb-2">PIX (Taxas)</span>
+                    <div class="flex flex-col gap-2">
+                       <div class="flex justify-between items-center text-xs font-bold text-[#333]">
+                         <span>Cash In (%):</span>
+                         <input type="text" v-model="coldfy.pixIn" class="w-16 bg-white border-b border-white/0 focus:border-[#005858] focus:outline-none text-right text-[#005858]" />
+                       </div>
+                       <div class="flex justify-between items-center text-xs font-bold text-[#333]">
+                         <span>Cash Out (%):</span>
+                         <input type="text" v-model="coldfy.pixOut" class="w-16 bg-white border-b border-white/0 focus:border-[#005858] focus:outline-none text-right text-[#005858]" />
+                       </div>
+                    </div>
+                 </div>
+                 <div class="p-4 rounded-2xl bg-white border border-gray-100">
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2">Cartão (Taxas)</span>
+                    <div class="flex justify-between items-center text-xs font-bold text-[#333]">
+                       <span>Cash In (%):</span>
+                       <input type="text" v-model="coldfy.cardIn" class="w-16 bg-white border-b border-gray-50 focus:border-[#005858] focus:outline-none text-right" />
+                    </div>
+                 </div>
+                 <div class="p-4 rounded-2xl bg-white border border-gray-100">
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2">Boleto (Taxas)</span>
+                    <div class="flex justify-between items-center text-xs font-bold text-[#333]">
+                       <span>Cash In (%):</span>
+                       <input type="text" v-model="coldfy.boletoIn" class="w-16 bg-white border-b border-gray-50 focus:border-[#005858] focus:outline-none text-right" />
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Mercado Pago -->
+        <div class="bg-white rounded-[24px] border border-gray-200 shadow-sm overflow-hidden">
+          <div class="px-8 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center gap-3">
+             <div class="w-2.5 h-2.5 rounded-full bg-[#005858]"></div>
+             <h3 class="text-[14px] font-black text-[#333] uppercase tracking-wider">Mercado Pago</h3>
+          </div>
+          <div class="p-8">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-widest">Access Token</label>
+              <input type="password" v-model="mercadoPago.accessToken" placeholder="TEST-..." class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-[#333] focus:outline-none focus:border-[#005858] transition-all" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: PagarMe -->
+        <div class="bg-white rounded-[24px] border border-gray-200 shadow-sm overflow-hidden">
+          <div class="px-8 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center gap-3">
+             <div class="w-2.5 h-2.5 rounded-full bg-[#005858]"></div>
+             <h3 class="text-[14px] font-black text-[#333] uppercase tracking-wider">PagarMe</h3>
+          </div>
+          <div class="p-8">
+            <div class="grid grid-cols-1 gap-6">
+              <div class="p-4 border border-indigo-100 bg-indigo-50/50 rounded-2xl text-[12px] font-bold text-indigo-700 flex items-center gap-3">
+                 <AlertCircle :size="18" />
+                 Registrar o webhook no painel da pagar.me: https://paguecomprasegura.com/pagarme/webhook
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                 <label class="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-widest">Chave Secreta</label>
+                 <input type="password" v-model="pagarme.secretKey" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-[#333] focus:outline-none focus:border-[#005858] transition-all" />
+              </div>
+
+               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div class="flex flex-col gap-1.5 text-left">
+                     <label class="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-widest">Taxa (PIX-IN)</label>
+                     <input type="text" v-model="pagarme.taxPixIn" class="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm font-black text-[#333] focus:outline-none focus:border-[#005858]" />
+                  </div>
+                  <div class="flex flex-col gap-1.5 text-left">
+                     <label class="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-widest">Taxa (PIX-OUT)</label>
+                     <input type="text" v-model="pagarme.taxPixOut" class="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm font-black text-[#333] focus:outline-none focus:border-[#005858]" />
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: EFÍ (Gerencianet) -->
+        <div class="bg-white rounded-[24px] border border-gray-200 shadow-sm overflow-hidden border-b-8 border-b-[#005858]/10">
+          <div class="px-8 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center gap-3">
+             <div class="w-2.5 h-2.5 rounded-full bg-[#005858]"></div>
+             <h3 class="text-[14px] font-black text-[#333] uppercase tracking-wider">Efí</h3>
+          </div>
+          <div class="p-8">
+            <div class="flex flex-col gap-8">
+              <!-- Keys Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div v-for="key in efiFields" :key="key.label" class="flex flex-col gap-1.5">
+                  <label class="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-widest">{{ key.label }}</label>
+                  <input type="text" v-model="efi[key.id]" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold text-[#333] focus:outline-none focus:border-[#005858] transition-all" />
+                </div>
+              </div>
+
+              <!-- Certificate Upload -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[11px] font-bold text-gray-400 ml-1">Certificado (.p12 / .pem)</label>
+                <div 
+                  @click="$refs.certInput.click()"
+                  class="w-full border-2 border-dashed border-gray-100 rounded-xl p-8 bg-gray-50/50 flex flex-col items-center justify-center gap-3 text-gray-400 group hover:border-[#005858] hover:bg-white transition-all cursor-pointer"
+                >
+                   <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-300 group-hover:text-[#005858] group-hover:scale-110 transition-all">
+                      <Upload :size="24" stroke-width="2.5" />
+                   </div>
+                   <div class="flex flex-col items-center">
+                      <span class="text-[11px] font-black uppercase tracking-widest group-hover:text-[#333]">Selecionar Certificado</span>
+                      <span class="text-[10px] font-medium text-gray-300 mt-1" v-if="!efi.certificate">Nenhum arquivo selecionado</span>
+                      <span class="text-[10px] font-bold text-[#005858] mt-1" v-else>{{ efi.certificate.name }}</span>
+                   </div>
+                   <input type="file" ref="certInput" class="sr-only" @change="e => efi.certificate = e.target.files[0]" />
+                </div>
+              </div>
+
+              <!-- Taxas e Prazos EFÍ -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <!-- Boleto -->
+                 <div class="bg-gray-50/50 rounded-2xl p-6 border border-gray-100 flex flex-col gap-5 hover:bg-white transition-all">
+                    <div class="flex items-center gap-2 border-b border-gray-100 pb-2">
+                       <FileText :size="16" class="text-indigo-500" />
+                       <h4 class="text-[13px] font-black text-[#333] uppercase tracking-widest">Boleto</h4>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Taxa (%)</label>
+                          <input type="text" v-model="efi.boletoRate" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] focus:border-[#005858] focus:outline-none" />
+                       </div>
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Fixa (R$)</label>
+                          <input type="text" v-model="efi.boletoFixed" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] focus:border-[#005858] focus:outline-none" />
+                       </div>
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Liberação</label>
+                          <div class="flex items-center gap-1.5">
+                             <span class="text-[10px] font-black text-gray-300">D+</span>
+                             <input type="text" v-model="efi.boletoDays" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] text-center focus:border-[#005858] focus:outline-none" />
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+                 <!-- Cartão -->
+                 <div class="bg-gray-50/50 rounded-2xl p-6 border border-gray-100 flex flex-col gap-5 hover:bg-white transition-all">
+                    <div class="flex items-center gap-2 border-b border-gray-100 pb-2">
+                       <CreditCard :size="16" class="text-[#005858]" />
+                       <h4 class="text-[13px] font-black text-[#333] uppercase tracking-widest">Cartão</h4>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Taxa (%)</label>
+                          <input type="text" v-model="efi.cardRate" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] focus:border-[#005858] focus:outline-none" />
+                       </div>
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Fixa (R$)</label>
+                          <input type="text" v-model="efi.cardFixed" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] focus:border-[#005858] focus:outline-none" />
+                       </div>
+                       <div class="flex flex-col gap-1.5">
+                          <label class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Liberação</label>
+                          <div class="flex items-center gap-1.5">
+                             <span class="text-[10px] font-black text-gray-300">D+</span>
+                             <input type="text" v-model="efi.cardDays" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs font-black text-[#333] text-center focus:border-[#005858] focus:outline-none" />
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+       <!-- Footer Action (Relative at bottom) -->
+       <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4 mb-10 px-2 pb-10">
+         <button 
+            class="w-full sm:w-auto bg-white text-gray-400 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest border border-gray-200 shadow-sm hover:bg-gray-50 transition-all cursor-pointer"
+         >
+           Resetar
+         </button>
+         <button 
+           @click="saveAcquirer"
+           class="w-full sm:w-auto bg-[#005858] text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(0,88,88,0.2)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer border border-white/10"
+         >
+           <Zap :size="18" stroke-width="3" />
+           Salvar Adquirentes
+         </button>
+       </div>
+     </div>
   </AdminLayout>
 </template>
 
 <script>
 import AdminLayout from '../../components/AdminLayout.vue'
-import { Zap, Lock, Eye, EyeOff, Link as LinkIcon, AlertCircle } from 'lucide-vue-next'
+import { ChevronDown, Zap, AlertCircle, Upload, Copy, FileText, CreditCard } from 'lucide-vue-next'
 import { useToast } from '../../composables/useToast'
 
 export default {
   name: 'SettingsAcquirerView',
   components: {
     AdminLayout,
-    Zap, Lock, Eye, EyeOff, LinkIcon, AlertCircle
+    ChevronDown, Zap, AlertCircle, Upload, Copy, FileText, CreditCard
   },
   setup() {
     const { showToast } = useToast()
@@ -92,19 +262,72 @@ export default {
   },
   data() {
     return {
-      showSecret: false,
-      acquirer: {
-        clientId: 'pg_live_8237492374',
-        secretKey: '••••••••••••••••••••••••',
-        webhookUrl: 'https://api.paguecompras.com/v1/callbacks/acquirer'
-      }
+      defaultAcquirer: 'ColdFy',
+      coldfy: {
+        webhookUrl: 'https://paguecomprasegura.com/coldfy/callback/deposit',
+        secretKey: 'sk_live_E8VLBqnXEtPqULnCdDtCovlSfZZz2ce27rTgHa2Tw4JfSO+Ti5HGC9+dcBj8Xw0PwKyrDRrdo9/85geRW1OwF1LN3oM2fbiVKOt+klGAwynlhgokFLFsrHij1xzqGZXZANZWmFErwcfHIpTUomR8HzC41G6ROvSDQfY7BALK8kg=',
+        companyId: 'd0e459e1-867f-4c32-892b-932db58b5880',
+        pixIn: '1,20',
+        pixOut: '0,00',
+        cardIn: '4,47',
+        boletoIn: '4,90'
+      },
+      mercadoPago: {
+        accessToken: ''
+      },
+      pagarme: {
+        secretKey: '',
+        taxPixIn: '0.00',
+        taxPixOut: '0.00'
+      },
+      efi: {
+        clientId: '',
+        secret: '',
+        pixKey: '',
+        accountId: '',
+        certificate: null,
+        boletoRate: '0.33',
+        boletoFixed: '1.00',
+        boletoDays: '5',
+        cardRate: '10.29',
+        cardFixed: '50.99',
+        cardDays: '21'
+      },
+      efiFields: [
+        { id: 'clientId', label: 'Client ID' },
+        { id: 'secret', label: 'Client Secret' },
+        { id: 'pixKey', label: 'Chave PIX' },
+        { id: 'accountId', label: 'Identificador de conta' }
+      ]
     }
   },
   methods: {
-    saveIntegration() {
-      // Mock test
-      this.showToast('Teste de conexão realizado com sucesso!', 'success')
+    copyToClipboard(text) {
+      navigator.clipboard.writeText(text)
+      this.showToast('URL copiada para a área de transferência', 'success')
+    },
+    saveAcquirer() {
+      this.showToast('Configurações de adquirentes salvas com sucesso!', 'success')
+      console.log('Saving acquirer settings:', { 
+        default: this.defaultAcquirer, 
+        coldfy: this.coldfy, 
+        mercadoPago: this.mercadoPago,
+        pagarme: this.pagarme,
+        efi: this.efi 
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+@reference "tailwindcss";
+
+input:focus {
+  @apply ring-4 ring-[#005858]/5 border-[#005858];
+}
+
+select:focus {
+  @apply ring-4 ring-[#005858]/5 border-[#005858];
+}
+</style>
