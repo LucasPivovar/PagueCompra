@@ -16,12 +16,64 @@
       </div>
 
       <div class="px-3 flex flex-col gap-8">
+        <!-- New Principal Section for Users -->
+        <div class="flex flex-col gap-1">
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2">USUÁRIO</span>
+          
+          <router-link to="/dashboard" class="nav-item group">
+            <LayoutDashboard :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Visão Geral</span>
+          </router-link>
+
+          <!-- Extratos Submenu -->
+          <div class="flex flex-col gap-1">
+            <button @click="isExtratosOpen = !isExtratosOpen" class="nav-item group w-full justify-between" :class="{ 'router-link-active': $route.path.includes('/financial/') && !$route.path.includes('/financial/wallets') }">
+              <div class="flex items-center gap-4">
+                <FileText :size="20" class="flex-shrink-0" />
+                <span v-if="!isCollapsed" class="font-bold text-[14px]">Extratos</span>
+              </div>
+              <ChevronDown v-if="!isCollapsed" :size="16" class="transition-transform duration-200" :class="{ 'rotate-180': isExtratosOpen }" />
+            </button>
+            
+            <div v-show="isExtratosOpen && !isCollapsed" class="flex flex-col gap-1 ml-4 mt-1 border-l border-dashed border-gray-100 pl-2">
+              <router-link to="/financial/income" class="nav-item group py-2">
+                <ArrowDownCircle :size="18" class="flex-shrink-0" />
+                <span class="font-bold text-[13px]">Entrada</span>
+              </router-link>
+              <router-link to="/financial/outcome" class="nav-item group py-2">
+                <ArrowUpCircle :size="18" class="flex-shrink-0" />
+                <span class="font-bold text-[13px]">Saída</span>
+              </router-link>
+            </div>
+          </div>
+
+          <router-link to="/wallet" class="nav-item group">
+            <Wallet :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Carteira</span>
+          </router-link>
+
+          <router-link to="/products" class="nav-item group">
+            <Package :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Meus Produtos</span>
+          </router-link>
+
+          <router-link to="/webhook" class="nav-item group">
+            <Webhook :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Webhook</span>
+          </router-link>
+
+          <router-link to="/account" class="nav-item group">
+            <User :size="20" class="flex-shrink-0" />
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Minha Conta</span>
+          </router-link>
+        </div>
+
         <!-- Dashboard & Core Management -->
         <div class="flex flex-col gap-1">
           <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2">ADMINISTRAÇÃO</span>
           <router-link to="/" class="nav-item group">
             <LayoutDashboard :size="20" class="flex-shrink-0" />
-            <span v-if="!isCollapsed" class="font-bold text-[14px]">Visão Geral</span>
+            <span v-if="!isCollapsed" class="font-bold text-[14px]">Dashboard</span>
           </router-link>
           
           <router-link to="/users" class="nav-item group">
@@ -91,7 +143,8 @@ import {
   Wallet,
   ArrowDownCircle,
   ArrowUpCircle,
-  Sliders, ShieldCheck, Zap
+  Sliders, ShieldCheck, Zap,
+  FileText, ChevronDown, Package, Webhook, User
 } from 'lucide-vue-next'
 
 export default {
@@ -100,12 +153,18 @@ export default {
   components: {
     LayoutDashboard, Users, CheckCircle2, 
     Wallet, ArrowDownCircle, ArrowUpCircle,
-    Sliders, ShieldCheck, Zap
+    Sliders, ShieldCheck, Zap,
+    FileText, ChevronDown, Package, Webhook, User
   },
   props: {
     isCollapsed: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      isExtratosOpen: false
     }
   }
 }

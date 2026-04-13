@@ -72,6 +72,49 @@ const routes = [
     name: 'TwoFactor',
     component: () => import('../views/TwoFactorView.vue'),
     meta: { title: '2FA' }
+  },
+  // User Routes
+  {
+    path: '/dashboard',
+    name: 'UserDashboard',
+    component: () => import('../views/user/Overview.vue'),
+    meta: { title: 'Dashboard' }
+  },
+  {
+    path: '/financial/income',
+    name: 'UserIncome',
+    component: () => import('../views/user/Income.vue'),
+    meta: { title: 'Entradas' }
+  },
+  {
+    path: '/financial/outcome',
+    name: 'UserOutcome',
+    component: () => import('../views/user/Outcome.vue'),
+    meta: { title: 'Saídas' }
+  },
+  {
+    path: '/wallet',
+    name: 'UserWallet',
+    component: () => import('../views/user/Wallet.vue'),
+    meta: { title: 'Carteira' }
+  },
+  {
+    path: '/products',
+    name: 'UserProducts',
+    component: () => import('../views/user/Products.vue'),
+    meta: { title: 'Meus Produtos' }
+  },
+  {
+    path: '/webhook',
+    name: 'UserWebhook',
+    component: () => import('../views/user/Webhook.vue'),
+    meta: { title: 'Webhook' }
+  },
+  {
+    path: '/account',
+    name: 'UserAccount',
+    component: () => import('../views/user/Account.vue'),
+    meta: { title: 'Minha Conta' }
   }
 
 ]

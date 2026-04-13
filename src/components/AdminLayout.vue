@@ -9,6 +9,11 @@
         <slot></slot>
       </main>
     </div>
+
+    <!-- Floating Chat Button -->
+    <button class="fixed right-[25px] bottom-[25px] w-14 h-14 bg-[#005858] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-[9999] border-4 border-white/20">
+       <MessageSquare :size="24" stroke-width="2.5" />
+    </button>
   </div>
 </template>
 
@@ -16,13 +21,15 @@
 import AdminSidebar from './AdminSidebar.vue'
 import AdminNavbar from './AdminNavbar.vue'
 import NotificationDrawer from './NotificationDrawer.vue'
+import { MessageSquare } from 'lucide-vue-next'
 
 export default {
   name: 'AdminLayout',
   components: {
     AdminSidebar,
     AdminNavbar,
-    NotificationDrawer
+    NotificationDrawer,
+    MessageSquare
   },
   data() {
     return {
