@@ -94,9 +94,9 @@ export default {
   data() {
     return {
       notifications: [
-        { id: 1, title: 'Novo Saque', message: 'Um novo pedido de saque de R$ 1.500,00 foi solicitado por Leandro Caetano.', time: '2m atrás', colorClass: 'bg-blue-50 text-blue-500' },
-        { id: 2, title: 'Usuário em Análise', message: 'Maria Oliveira enviou documentos para revisão.', time: '15m atrás', colorClass: 'bg-yellow-50 text-yellow-500' },
-        { id: 3, title: 'Transação Aprovada', message: 'A transação de R$ 250,00 foi aprovada com sucesso.', time: '1h atrás', colorClass: 'bg-green-50 text-green-500' }
+        { id: 1, title: 'Novo Saque', message: 'Um novo pedido de saque de R$ 1.500,00 foi solicitado por Leandro Caetano.', time: '2m atrás', colorClass: 'bg-[#D7FF00]/10 text-[#D7FF00]' },
+        { id: 2, title: 'Usuário em Análise', message: 'Maria Oliveira enviou documentos para revisão.', time: '15m atrás', colorClass: 'bg-orange-500/10 text-orange-500' },
+        { id: 3, title: 'Transação Aprovada', message: 'A transação de R$ 250,00 foi aprovada com sucesso.', time: '1h atrás', colorClass: 'bg-[#D7FF00]/10 text-[#D7FF00]' }
       ]
     }
   },
