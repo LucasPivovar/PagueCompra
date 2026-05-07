@@ -5,11 +5,11 @@
       <div class="bg-[#0A0A0A] rounded-[20px] sm:rounded-[24px] shadow-sm border border-[#1A1A1A] p-6 sm:p-10 transition-all hover:shadow-md">
         <!-- Logo Inside Card -->
         <div class="flex justify-center mb-6 sm:mb-8">
-          <img src="../assets/logo.png" alt="PagAgora" class="h-14 sm:h-16 w-auto object-contain" />
+          <img src="../assets/logo.png" alt="PagAgora" class="h-10 sm:h-12 w-auto object-contain" />
         </div>
 
         <div class="mb-6 sm:mb-8 text-center">
-          <h1 class="text-xl sm:text-2xl font-black text-[white] mb-1.5 sm:mb-2">Autenticação de Dois Fatores</h1>
+          <h1 class="text-xl sm:text-2xl font-black text-white mb-1.5 sm:mb-2">Autenticação de Dois Fatores</h1>
           <p class="text-[13px] sm:text-[15px] leading-relaxed text-gray-500 font-medium">
             Digite o código de 6 dígitos gerado pelo seu <br class="hidden sm:block"/>
             aplicativo autenticador ou enviado por e-mail.
@@ -19,7 +19,7 @@
         <form @submit.prevent="handleVerify" class="space-y-6">
           <!-- Code Fields -->
           <div class="space-y-3 mb-8">
-            <label class="block text-sm font-bold text-[white] text-center">Código de Verificação</label>
+            <label class="block text-sm font-bold text-white text-center">Código de Verificação</label>
             <div class="flex justify-center gap-2 sm:gap-3">
               <input 
                 v-for="(digit, index) in code" 
@@ -28,7 +28,7 @@
                 v-model="code[index]"
                 type="text" 
                 maxlength="1"
-                class="w-11 h-12 sm:w-12 sm:h-14 text-center font-outfit text-xl sm:text-2xl font-bold bg-[#1A1A1A] border border-[#1A1A1A] rounded-xl focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] focus:ring-2 focus:ring-[#D7FF00]/10 transition-all shadow-sm"
+                class="w-11 h-12 sm:w-12 sm:h-14 text-center font-outfit text-xl sm:text-2xl font-bold bg-[#1A1A1A] border border-[#1A1A1A] rounded-xl focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] focus:ring-2 focus:ring-[#D7FF00]/10 transition-all shadow-sm text-white"
                 @input="handleInput($event, index)"
                 @keydown.delete="handleDelete($event, index)"
                 @paste="handlePaste"
