@@ -62,6 +62,12 @@ const routes = [
     meta: { title: 'Login' }
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/RegisterView.vue'),
+    meta: { title: 'Cadastro' }
+  },
+  {
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: () => import('../views/ForgotPasswordView.vue'),
@@ -125,7 +131,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | PagueCompras`
+  document.title = `PagAgora - ${to.meta.title}`
   next()
 })
 

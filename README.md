@@ -1,4 +1,4 @@
-# paguecompras
+# PagAgora
 
 ## Project setup
 ```

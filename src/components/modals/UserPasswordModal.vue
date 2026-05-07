@@ -1,10 +1,10 @@
 <template>
-  <div v-if="isOpen" @click.self="close" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 font-poppins px-2 sm:px-4 py-4 sm:py-8">
-    <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-full sm:w-[80vw] max-w-lg overflow-hidden transition-all scale-100 active:scale-95">
+  <div v-if="isOpen" @click.self="close" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 font-outfit px-2 sm:px-4 py-4 sm:py-8">
+    <div class="bg-[#0A0A0A] rounded-2xl shadow-2xl border border-[#1A1A1A] w-full sm:w-[80vw] max-w-lg overflow-hidden transition-all scale-100 active:scale-95">
       <!-- Header -->
-      <div class="flex items-center justify-between p-5 sm:p-6 border-b border-gray-100">
-        <h3 class="text-xl font-black text-[#333] tracking-tight">Alterar senha</h3>
-        <button @click="close" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100">
+      <div class="flex items-center justify-between p-5 sm:p-6 border-b border-[#1A1A1A]">
+        <h3 class="text-xl font-black text-[white] tracking-tight">Alterar senha</h3>
+        <button @click="close" class="text-gray-500 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-[#1A1A1A]">
           <X :size="24" stroke-width="2.5" />
         </button>
       </div>
@@ -12,12 +12,12 @@
       <!-- Body -->
       <div class="p-6 sm:p-8">
         <div class="flex flex-col gap-2">
-          <label class="text-[13px] text-gray-400 font-bold uppercase tracking-wider">Nova senha</label>
+          <label class="text-[13px] text-gray-500 font-bold uppercase tracking-wider">Nova senha</label>
           <input 
             type="password" 
             v-model="newPassword"
             placeholder="Digite a nova senha..."
-            class="px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-[#005858] focus:bg-white transition-all shadow-sm w-full font-medium"
+            class="px-4 py-3 bg-[#1A1A1A] border border-[#1A1A1A] rounded-xl text-sm focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] transition-all shadow-sm w-full font-medium"
           >
         </div>
       </div>
@@ -32,7 +32,7 @@
         </button>
         <button 
           @click="save" 
-          class="px-8 py-3 bg-[#005858] text-white text-[15px] font-bold rounded-xl hover:bg-[#004747] shadow-lg shadow-green-900/10 transition-all active:scale-95 cursor-pointer order-1 sm:order-2"
+          class="px-8 py-3 bg-[#D7FF00] text-black text-[15px] font-bold rounded-xl hover:bg-[#004747] shadow-lg shadow-green-900/10 transition-all active:scale-95 cursor-pointer order-1 sm:order-2"
         >
           Salvar
         </button>

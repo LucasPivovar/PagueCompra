@@ -12,11 +12,11 @@
       ></div>
 
       <!-- Drawer Panel -->
-      <aside class="fixed right-0 top-0 h-full w-[350px] bg-white shadow-2xl z-[200] flex flex-col font-poppins panel-slide">
+      <aside class="fixed right-0 top-0 h-full w-[350px] bg-[#0A0A0A] shadow-2xl z-[200] flex flex-col font-outfit panel-slide">
         <!-- Header -->
-        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+        <div class="p-6 border-b border-[#1A1A1A] flex justify-between items-center bg-[#1A1A1A]/50">
           <div class="flex items-center gap-3">
-            <div class="p-2 bg-[#005858]/10 rounded-lg text-[#005858]">
+            <div class="p-2 bg-[#D7FF00]/10 rounded-lg text-[#D7FF00]">
               <Bell :size="20" />
             </div>
             <h2 class="text-lg font-bold text-gray-800">Notificações</h2>
@@ -26,7 +26,7 @@
           </div>
           <button 
             @click="$emit('close')"
-            class="p-2 hover:bg-white rounded-full text-gray-400 hover:text-gray-600 transition-all cursor-pointer shadow-sm border border-transparent hover:border-gray-100"
+            class="p-2 hover:bg-[#0A0A0A] rounded-full text-gray-500 hover:text-gray-600 transition-all cursor-pointer shadow-sm border border-transparent hover:border-[#1A1A1A]"
           >
             <X :size="20" />
           </button>
@@ -38,7 +38,7 @@
             <div 
               v-for="notif in notifications" 
               :key="notif.id" 
-              class="p-4 rounded-xl border border-gray-100 hover:border-[#005858]/30 hover:bg-gray-50/50 transition-all cursor-pointer group"
+              class="p-4 rounded-xl border border-[#1A1A1A] hover:border-[#D7FF00]/30 hover:bg-[#1A1A1A]/50 transition-all cursor-pointer group"
             >
               <div class="flex gap-3">
                 <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
@@ -48,7 +48,7 @@
                 <div class="flex-1">
                   <div class="flex justify-between items-start mb-1">
                     <span class="text-sm font-bold text-gray-800">{{ notif.title }}</span>
-                    <span class="text-[10px] text-gray-400 font-bold uppercase mt-0.5">{{ notif.time }}</span>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase mt-0.5">{{ notif.time }}</span>
                   </div>
                   <p class="text-[12px] text-gray-500 leading-relaxed">{{ notif.message }}</p>
                 </div>
@@ -58,17 +58,17 @@
 
           <!-- Empty State -->
           <div v-if="notifications.length === 0" class="h-48 flex flex-col items-center justify-center opacity-40">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3 text-gray-300"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="m2 2 20 20"/></svg>
-            <p class="text-sm font-bold text-gray-400">Nenhuma notificação</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3 text-gray-500"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="m2 2 20 20"/></svg>
+            <p class="text-sm font-bold text-gray-500">Nenhuma notificação</p>
           </div>
         </div>
 
         <!-- Footer -->
-        <div class="p-4 border-t border-gray-100 bg-gray-50/30">
+        <div class="p-4 border-t border-[#1A1A1A] bg-[#1A1A1A]/30">
           <button 
             @click="clearAll" 
             :disabled="notifications.length === 0"
-            class="w-full py-3 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs font-bold hover:bg-gray-50 transition-colors uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            class="w-full py-3 bg-[#0A0A0A] border border-[#1A1A1A] text-gray-600 rounded-xl text-xs font-bold hover:bg-[#1A1A1A] transition-colors uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             Limpar Tudo
           </button>

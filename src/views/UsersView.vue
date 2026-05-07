@@ -3,18 +3,18 @@
     <div class="flex flex-col gap-8">
       <!-- Internal Header -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center px-2 sm:px-6 gap-4">
-        <h2 class="text-2xl font-black text-[#333]">Usuários</h2>
+        <h2 class="text-2xl font-black text-[white]">Usuários</h2>
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <div class="relative text-left w-full sm:w-64">
-            <Search class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" :size="20" />
+            <Search class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" :size="20" />
             <input 
               v-model="searchQuery"
               type="text" 
               placeholder="Pesquisar usuários..." 
-              class="pl-11 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-[#005858] w-full shadow-sm placeholder:text-gray-400"
+              class="pl-11 pr-4 py-2.5 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl text-sm focus:outline-none focus:border-[#D7FF00] w-full shadow-sm placeholder:text-gray-500"
             >
           </div>
-          <select v-model="filterStatus" class="px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-[#005858] shadow-sm text-gray-500 font-medium cursor-pointer min-h-[44px]">
+          <select v-model="filterStatus" class="px-4 py-2.5 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl text-sm focus:outline-none focus:border-[#D7FF00] shadow-sm text-gray-500 font-medium cursor-pointer min-h-[44px]">
             <option value="Todos">Todos</option>
             <option value="Ativo">Ativos</option>
             <option value="Análise">Em Análise</option>
@@ -25,12 +25,12 @@
 
       <!-- KPI Cards Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-2 sm:px-6">
-        <div v-for="(kpi, index) in kpis" :key="index" class="bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 border-l-4 border-l-[#1f9a6a] flex justify-between items-start transition-all">
-          <div class="text-left font-poppins">
-            <div class="text-2xl font-black text-[#333]">{{ kpi.value }}</div>
-            <div class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">{{ kpi.label }}</div>
+        <div v-for="(kpi, index) in kpis" :key="index" class="bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] border-l-4 border-l-[#D7FF00] flex justify-between items-start transition-all hover:scale-[1.02]">
+          <div class="text-left font-outfit">
+            <div class="text-2xl font-black text-[white]">{{ kpi.value }}</div>
+            <div class="text-[12px] text-gray-500 font-bold uppercase tracking-wider">{{ kpi.label }}</div>
           </div>
-          <div class="w-10 h-10 rounded-full bg-[#1f9a6a]/15 flex items-center justify-center text-[#1f9a6a] flex-shrink-0 border border-[#e2e8f0]">
+          <div class="w-10 h-10 rounded-full bg-[#D7FF00]/10 flex items-center justify-center text-[#D7FF00] flex-shrink-0 border border-[#D7FF00]/20">
             <component :is="kpi.icon" :size="18" stroke-width="2.5" />
           </div>
         </div>
@@ -38,7 +38,7 @@
 
       <!-- Users Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 items-start">
-        <div v-for="user in currentUsers" :key="user.id" class="bg-white rounded-[20px] shadow-sm border border-gray-300 flex flex-col group hover:shadow-md transition-all relative font-poppins text-left">
+        <div v-for="user in currentUsers" :key="user.id" class="bg-[#0A0A0A] rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col group hover:shadow-md transition-all relative font-outfit text-left">
           <!-- Card Body -->
           <div class="p-4 sm:p-5 pb-0">
             <!-- User Header Row -->
@@ -47,12 +47,12 @@
                 <UserIcon :size="28" stroke-width="2.5" />
               </div>
               <div class="flex flex-col flex-1 pt-0.5 min-w-0" style="line-height: 1.2">
-                <h4 class="m-0 font-bold text-[#333] text-[15px] sm:text-[17px] leading-tight truncate">{{ user.name }}</h4>
-                <p class="m-0 text-[13px] sm:text-[15px] text-[#333] font-medium mt-0.5 truncate">{{ user.idNumber }}</p>
-                <span class="text-[13px] sm:text-[15px] text-gray-400 font-medium mt-0.5">Cliente</span>
+                <h4 class="m-0 font-bold text-[white] text-[15px] sm:text-[17px] leading-tight truncate">{{ user.name }}</h4>
+                <p class="m-0 text-[13px] sm:text-[15px] text-[white] font-medium mt-0.5 truncate">{{ user.idNumber }}</p>
+                <span class="text-[13px] sm:text-[15px] text-gray-500 font-medium mt-0.5">Cliente</span>
               </div>
               <div class="relative">
-                <button @click="toggleDropdown(user.id)" class="text-gray-400 hover:text-[#005858] transition-colors p-1.5 rounded-full hover:bg-gray-50 flex items-center justify-center cursor-pointer">
+                <button @click="toggleDropdown(user.id)" class="text-gray-500 hover:text-[#D7FF00] transition-colors p-1.5 rounded-full hover:bg-[#1A1A1A] flex items-center justify-center cursor-pointer">
                   <MoreVertical :size="20" />
                 </button>
                 
@@ -60,39 +60,39 @@
                 <div v-if="activeDropdown === user.id" @click="activeDropdown = null" class="fixed inset-0 z-10"></div>
 
                 <!-- Dropdown Action Menu -->
-                <div v-if="activeDropdown === user.id" class="absolute right-0 top-full mt-1 w-[160px] sm:w-48 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-20 font-poppins text-left">
-                  <button @click="openViewModal(user)" class="w-full text-left px-3 sm:px-4 py-2 text-[14px] sm:text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
-                    <Eye :size="18" class="text-[#005858]" />
+                <div v-if="activeDropdown === user.id" class="absolute right-0 top-full mt-1 w-[160px] sm:w-48 bg-[#0A0A0A] rounded-xl shadow-2xl border border-[#1A1A1A] py-2 z-20 font-outfit text-left">
+                  <button @click="openViewModal(user)" class="w-full text-left px-3 sm:px-4 py-2 text-[14px] sm:text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
+                    <Eye :size="18" class="text-[#D7FF00]" />
                     <span class="font-medium">Visualizar</span>
                   </button>
-                  <button @click="openEditModal(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
-                    <Edit3 :size="18" class="text-[#005858]" />
+                  <button @click="openEditModal(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
+                    <Edit3 :size="18" class="text-[#D7FF00]" />
                     <span class="font-medium">Editar</span>
                   </button>
-                  <button @click="openPasswordModal(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
-                    <Lock :size="18" class="text-[#005858]" />
+                  <button @click="openPasswordModal(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
+                    <Lock :size="18" class="text-[#D7FF00]" />
                     <span class="font-medium">Senha</span>
                   </button>
 
-                  <div class="my-1 border-b border-dashed border-gray-200"></div>
+                  <div class="my-1 border-b border-dashed border-[#1A1A1A]"></div>
 
-                  <button @click="handleStatusChange(user, 'Ativo')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
-                    <CheckCircle :size="18" class="text-[#005858]" />
+                  <button @click="handleStatusChange(user, 'Ativo')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
+                    <CheckCircle :size="18" class="text-[#D7FF00]" />
                     <span class="font-medium">Aprovar</span>
                   </button>
-                  <button @click="handleStatusChange(user, 'Recusado')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
+                  <button @click="handleStatusChange(user, 'Recusado')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
                     <CircleOff :size="18" class="text-[#f59e0b]" />
                     <span class="font-medium">Reprovar</span>
                   </button>
-                  <button @click="handleStatusChange(user, 'Bloqueado')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
+                  <button @click="handleStatusChange(user, 'Bloqueado')" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
                     <UserX :size="18" class="text-[#ef4444]" />
                     <span class="font-medium">Banir</span>
                   </button>
 
-                  <div class="my-1 border-b border-dashed border-gray-200"></div>
+                  <div class="my-1 border-b border-dashed border-[#1A1A1A]"></div>
 
-                  <button @click="handleDelete(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer">
-                    <Trash2 :size="18" class="text-[#005858]" />
+                  <button @click="handleDelete(user)" class="w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-[#1A1A1A] flex items-center gap-3 cursor-pointer">
+                    <Trash2 :size="18" class="text-[#D7FF00]" />
                     <span class="font-medium">Excluir</span>
                   </button>
                 </div>
@@ -102,25 +102,25 @@
             <!-- Sales Section -->
             <div class="mb-0 mt-2">
               <p class="text-[13px] sm:text-[15px] text-gray-500 mb-0.5 font-medium">Vendas últimos 7 dias</p>
-              <h2 class="text-[20px] sm:text-[24px] font-black text-[#333] tracking-tighter leading-none mb-1">{{ user.sales }}</h2>
+              <h2 class="text-[20px] sm:text-[24px] font-black text-[white] tracking-tighter leading-none mb-1">{{ user.sales }}</h2>
             </div>
           </div>
 
           <!-- Divider -->
-          <div class="h-px bg-gray-100 mx-0 mt-0 px-0"></div>
+          <div class="h-px bg-[#1A1A1A] mx-0 mt-0 px-0"></div>
 
           <!-- Card Footer -->
           <div class="px-4 sm:px-5 pt-1.5 pb-5 grid grid-cols-2 min-[450px]:grid-cols-3 gap-2 text-left">
             <div class="flex flex-col gap-1.5 sm:gap-2">
-              <span class="text-[12px] sm:text-[14px] font-bold text-[#333]">Status</span>
+              <span class="text-[12px] sm:text-[14px] font-bold text-[white]">Status</span>
               <span :class="getStatusBadgeClass(user.status)">{{ user.status }}</span>
             </div>
             <div class="flex flex-col gap-1.5 sm:gap-2">
-              <span class="text-[12px] sm:text-[14px] font-bold text-[#333]">Documento</span>
+              <span class="text-[12px] sm:text-[14px] font-bold text-[white]">Documento</span>
               <span :class="getDocBadgeClass(user.docStatus)">{{ user.docStatus }}</span>
             </div>
             <div class="flex flex-col gap-1.5 sm:gap-2 col-span-2 min-[450px]:col-span-1 border-t min-[450px]:border-t-0 pt-2 min-[450px]:pt-0 mt-1 min-[450px]:mt-0">
-              <span class="text-[12px] sm:text-[14px] font-bold text-[#333]">Criado em</span>
+              <span class="text-[12px] sm:text-[14px] font-bold text-[white]">Criado em</span>
               <span class="text-[12px] sm:text-[13px] font-medium text-gray-700 pt-1 leading-tight">{{ user.createdAtFull || '14/10/2025 às 05:52' }}</span>
             </div>
           </div>
@@ -128,8 +128,8 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="filteredUsers.length > 9" class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6 px-4 py-8 border-t border-gray-100 text-center md:text-left">
-        <span class="text-sm font-medium text-gray-400">Mostrando {{ currentUsers.length }} de {{ filteredUsers.length }} usuários</span>
+      <div v-if="filteredUsers.length > 9" class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6 px-4 py-8 border-t border-[#1A1A1A] text-center md:text-left">
+        <span class="text-sm font-medium text-gray-500">Mostrando {{ currentUsers.length }} de {{ filteredUsers.length }} usuários</span>
         <div class="flex flex-wrap justify-center gap-2">
           <button @click="currentPage = Math.max(1, currentPage - 1)" class="pagination-btn" :disabled="currentPage === 1">Anterior</button>
           <button 
@@ -142,8 +142,8 @@
           <button @click="currentPage = Math.min(totalPages, currentPage + 1)" class="pagination-btn" :disabled="currentPage === totalPages">Próximo</button>
         </div>
       </div>
-      <div v-else-if="filteredUsers.length > 0" class="mt-6 px-4 py-8 border-t border-gray-100">
-        <span class="text-sm font-medium text-gray-400">Mostrando todos os {{ filteredUsers.length }} usuários filtrados</span>
+      <div v-else-if="filteredUsers.length > 0" class="mt-6 px-4 py-8 border-t border-[#1A1A1A]">
+        <span class="text-sm font-medium text-gray-500">Mostrando todos os {{ filteredUsers.length }} usuários filtrados</span>
       </div>
       <!-- Modals Teleported outside layout to overlay sidebar -->
       <Teleport to="body">
@@ -175,7 +175,7 @@
             <div class="relative max-w-[90vw] max-h-[90vh]">
               <button 
                 @click="imagePreviewUrl = null"
-                class="absolute -top-4 -right-4 w-9 h-9 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 shadow-xl z-10 cursor-pointer transition-all hover:scale-110"
+                class="absolute -top-4 -right-4 w-9 h-9 bg-[#0A0A0A] rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 shadow-xl z-10 cursor-pointer transition-all hover:scale-110"
               >
                 <X :size="18" />
               </button>
@@ -330,19 +330,19 @@ export default {
       this.activeDropdown = null
     },
     getStatusBadgeClass(status) {
-      const base = 'px-2 py-0.5 rounded-[5px] text-[13px] font-medium inline-block w-fit min-w-[55px] text-center'
-      if (status === 'Ativo') return `${base} bg-[#c6f6d5] text-[#22543d]`
-      if (status === 'Análise') return `${base} bg-[#fefcbf] text-[#744210]`
-      if (status === 'Bloqueado') return `${base} bg-[#fed7d7] text-[#822727]`
-      if (status === 'Recusado') return `${base} bg-[#fed7d7] text-[#822727]`
-      return `${base} bg-gray-100 text-gray-700`
+      const base = 'px-2 py-0.5 rounded-[5px] text-[11px] font-black uppercase tracking-wider inline-block w-fit min-w-[55px] text-center border'
+      if (status === 'Ativo') return `${base} bg-[#D7FF00]/10 text-[#D7FF00] border-[#D7FF00]/30`
+      if (status === 'Análise') return `${base} bg-amber-400/10 text-amber-500 border-amber-500/30`
+      if (status === 'Bloqueado') return `${base} bg-rose-400/10 text-rose-500 border-rose-500/30`
+      if (status === 'Recusado') return `${base} bg-rose-400/10 text-rose-500 border-rose-500/30`
+      return `${base} bg-[#1A1A1A] text-gray-500 border-[#1A1A1A]`
     },
     getDocBadgeClass(status) {
-      const base = 'px-2 py-0.5 rounded-[5px] text-[13px] font-medium inline-block w-fit min-w-[55px] text-center'
-      if (status === 'Verificado') return `${base} bg-[#c6f6d5] text-[#22543d]`
-      if (status === 'Análise') return `${base} bg-[#fefcbf] text-[#744210]`
-      if (status === 'Recusado') return `${base} bg-[#fed7d7] text-[#822727]`
-      return `${base} bg-[#fefcbf] text-[#744210]`
+      const base = 'px-2 py-0.5 rounded-[5px] text-[11px] font-black uppercase tracking-wider inline-block w-fit min-w-[55px] text-center border'
+      if (status === 'Verificado') return `${base} bg-[#D7FF00]/10 text-[#D7FF00] border-[#D7FF00]/30`
+      if (status === 'Análise') return `${base} bg-amber-400/10 text-amber-500 border-amber-500/30`
+      if (status === 'Recusado') return `${base} bg-rose-400/10 text-rose-500 border-rose-500/30`
+      return `${base} bg-amber-400/10 text-amber-500 border-amber-500/30`
     }
   }
 }
@@ -352,15 +352,15 @@ export default {
 @reference "tailwindcss";
 
 .pagination-btn {
-  @apply px-4 py-2 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-400 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply px-4 py-2 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl text-sm font-bold text-gray-500 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 .pagination-btn:not(:disabled) {
-  @apply text-gray-600 border-gray-400 hover:border-[#005858] hover:text-[#005858];
+  @apply text-gray-600 border-gray-500 hover:border-[#D7FF00] hover:text-[#D7FF00];
 }
 
 .pagination-btn.active {
-  @apply bg-[#005858] text-white border-[#005858] shadow-lg shadow-green-900/10 scale-105;
+  @apply bg-[#D7FF00] text-black border-[#D7FF00] shadow-lg shadow-green-900/10 scale-105;
 }
 
 /* Image Preview Modal Animation */

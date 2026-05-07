@@ -1,22 +1,22 @@
 <template>
   <AdminLayout>
-    <div class="flex flex-col gap-6 font-poppins text-left mb-10">
+    <div class="flex flex-col gap-6 font-outfit text-left mb-10">
       <!-- Header with Filter -->
-      <div class="px-2 font-poppins flex justify-between items-center">
-        <h1 class="text-2xl font-black text-[#333]">Dashboard admin</h1>
+      <div class="px-2 font-outfit flex justify-between items-center">
+        <h1 class="text-2xl font-black text-white">Dashboard admin</h1>
         
         <!-- Dashboard Date Filter -->
         <div class="relative w-[160px]">
-          <select v-model="filterTime" @change="updateDashboardData" class="w-full pl-10 pr-8 py-2 bg-white border border-gray-300 rounded-xl text-[13px] font-bold text-gray-600 focus:outline-none focus:border-[#005858] appearance-none cursor-pointer transition-all hover:border-gray-400 shadow-sm">
+          <select v-model="filterTime" @change="updateDashboardData" class="w-full pl-10 pr-8 py-2 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl text-[13px] font-bold text-gray-500 focus:outline-none focus:border-[#D7FF00] appearance-none cursor-pointer transition-all hover:border-gray-700 shadow-sm">
             <option value="today">Hoje</option>
             <option value="week">Esta semana</option>
             <option value="month">Este mês</option>
             <option value="year">Este ano</option>
           </select>
-          <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#005858]">
+          <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D7FF00]">
              <Calendar :size="14" />
           </div>
-          <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+          <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </div>
         </div>
@@ -24,13 +24,13 @@
 
       <!-- Top Stats Grid (4 cards) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-        <div v-for="(card, index) in topCards" :key="index" class="bg-white p-5 rounded-[20px] shadow-sm border border-gray-300 flex justify-between items-start hover:shadow-md transition-all">
+        <div v-for="(card, index) in topCards" :key="index" class="bg-[#0A0A0A] p-5 rounded-[20px] shadow-sm border border-[#1A1A1A] flex justify-between items-start hover:shadow-md transition-all">
           <div class="text-left flex flex-col gap-1">
-            <div class="text-[22px] font-bold text-[#333] tracking-tight leading-none">{{ card.value }}</div>
-            <div class="text-[13px] text-gray-400 font-bold uppercase tracking-wider">{{ card.label }}</div>
-            <div v-if="card.subtext" class="text-[12px] font-bold text-[#005858] mt-1">{{ card.subtext }}</div>
+            <div class="text-[22px] font-bold text-white tracking-tight leading-none">{{ card.value }}</div>
+            <div class="text-[13px] text-gray-500 font-bold uppercase tracking-wider">{{ card.label }}</div>
+            <div v-if="card.subtext" class="text-[12px] font-bold text-[#D7FF00] mt-1">{{ card.subtext }}</div>
           </div>
-          <div class="w-10 h-10 rounded-full bg-[#005858]/20 flex items-center justify-center text-[#005858] flex-shrink-0 transition-all group-hover:bg-[#005858] group-hover:text-white">
+          <div class="w-10 h-10 rounded-full bg-[#D7FF00]/10 flex items-center justify-center text-[#D7FF00] flex-shrink-0 transition-all group-hover:bg-[#D7FF00] group-hover:text-black">
             <component :is="card.icon" :size="18" stroke-width="2.5" />
           </div>
         </div>
@@ -39,12 +39,12 @@
       <!-- Middle Section: Chart and Activity -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 px-2">
         <!-- Volume Financeiro (Card 9) -->
-        <div class="lg:col-span-2 bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-6 relative">
-          <h3 class="text-base font-bold text-[#333]">Volume Financeiro</h3>
+        <div class="lg:col-span-2 bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-6 relative">
+          <h3 class="text-base font-bold text-white">Volume Financeiro</h3>
           
           <div class="relative h-[280px] w-full mt-4 pb-12" @mouseleave="hoveredPoint = null">
             <!-- Y-Axis labels -->
-            <div class="absolute left-0 h-[200px] flex flex-col justify-between text-[11px] text-gray-400 font-bold pr-4 pointer-events-none">
+            <div class="absolute left-0 h-[200px] flex flex-col justify-between text-[11px] text-gray-500 font-bold pr-4 pointer-events-none">
               <span>{{ maxChartValue }}</span>
               <span>{{ Math.round(maxChartValue * 0.75) }}</span>
               <span>{{ Math.round(maxChartValue * 0.5) }}</span>
@@ -53,8 +53,8 @@
             </div>
             
             <!-- Grid Lines -->
-            <div class="ml-12 h-[200px] flex flex-col justify-between border-b border-gray-100 pointer-events-none">
-               <div v-for="i in 4" :key="i" class="w-full border-t border-dashed border-gray-100 h-0"></div>
+            <div class="ml-12 h-[200px] flex flex-col justify-between border-b border-[#1A1A1A] pointer-events-none">
+               <div v-for="i in 4" :key="i" class="w-full border-t border-dashed border-[#1A1A1A] h-0"></div>
             </div>
 
             <!-- Plotting Area -->
@@ -72,7 +72,7 @@
                 <path 
                   :d="mainLinePath" 
                   fill="none" 
-                  stroke="#005858" 
+                  stroke="#D7FF00" 
                   stroke-width="5" 
                   stroke-linecap="round"
                   class="chart-line-main"
@@ -80,8 +80,8 @@
 
                 <defs>
                   <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#005858" stop-opacity="0.35" />
-                    <stop offset="100%" stop-color="#005858" stop-opacity="0.05" />
+                    <stop offset="0%" stop-color="#D7FF00" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#D7FF00" stop-opacity="0.05" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -90,7 +90,7 @@
               <div 
                 v-for="(point, idx) in chartData" 
                 :key="'dot-' + idx"
-                class="absolute w-3 h-3 bg-[#005858] border-2 border-white rounded-full shadow-md z-10 transition-all duration-300 dot-grow"
+                class="absolute w-3 h-3 bg-[#D7FF00] border-2 border-[#0A0A0A] rounded-full shadow-md z-10 transition-all duration-300 dot-grow"
                 :class="{ 'scale-150 z-20 shadow-lg': hoveredPoint === idx }"
                 :style="{ 
                   left: `${getXPercent(idx)}%`, 
@@ -117,41 +117,41 @@
               <!-- Tooltip Modal -->
               <div 
                 v-if="hoveredPoint !== null"
-                class="absolute z-50 bg-[#313131] text-white px-3 py-2 rounded-xl text-xs font-bold shadow-2xl pointer-events-none transition-all duration-200 -translate-x-1/2 -translate-y-[145%]"
+                class="absolute z-50 bg-[#0A0A0A] text-white px-3 py-2 rounded-xl text-xs font-bold shadow-2xl pointer-events-none transition-all duration-200 -translate-x-1/2 -translate-y-[145%]"
                 :style="{ 
                   left: `${getXPercent(hoveredPoint)}%`, 
                   top: `${getYPercentInternal(chartData[hoveredPoint].value)}%` 
                 }"
               >
-                <div class="text-gray-400 uppercase text-[10px] tracking-widest mb-0.5">{{ chartData[hoveredPoint].month }}</div>
+                <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-0.5">{{ chartData[hoveredPoint].month }}</div>
                 <div class="text-[14px]">R$ {{ chartData[hoveredPoint].value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</div>
-                <div class="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#313131] rotate-45"></div>
+                <div class="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#0A0A0A] rotate-45"></div>
               </div>
             </div>
 
             <!-- Month Labels -->
-            <div class="absolute top-[215px] left-12 right-0 flex justify-between text-[11px] text-gray-400 font-bold px-0">
+            <div class="absolute top-[215px] left-12 right-0 flex justify-between text-[11px] text-gray-500 font-bold px-0">
               <div 
                 v-for="idx in chartData.length" 
                 :key="'label-'+idx" 
                 class="w-0 overflow-visible flex justify-center"
               >
-                <span class="whitespace-nowrap font-poppins">{{ chartData[idx-1].month }}</span>
+                <span class="whitespace-nowrap font-outfit">{{ chartData[idx-1].month }}</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Atividade Recente (Card 10) -->
-        <div class="bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-6">
-          <h3 class="text-base font-bold text-[#333]">Atividade Recente</h3>
+        <div class="bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-6">
+          <h3 class="text-base font-bold text-white">Atividade Recente</h3>
           <div class="flex flex-col">
-            <div v-for="(activity, index) in activities" :key="index" class="py-4 border-b last:border-0 border-gray-100 flex justify-between items-center group hover:bg-gray-50/50 px-2 rounded-lg transition-all cursor-pointer">
+            <div v-for="(activity, index) in activities" :key="index" class="py-4 border-b last:border-0 border-[#1A1A1A] flex justify-between items-center group hover:bg-[#0A0A0A]/5 px-2 rounded-lg transition-all cursor-pointer">
               <div class="text-left flex flex-col gap-0.5">
-                <div class="text-[14px] font-bold text-[#333]">{{ activity.user }}</div>
-                <div class="text-[12px] text-gray-400 font-medium">{{ activity.type }} • {{ activity.time }}</div>
+                <div class="text-[14px] font-bold text-white">{{ activity.user }}</div>
+                <div class="text-[12px] text-gray-500 font-medium">{{ activity.type }} • {{ activity.time }}</div>
               </div>
-              <div class="text-[14px] font-bold text-[#333]">{{ activity.value }}</div>
+              <div class="text-[14px] font-bold text-white">{{ activity.value }}</div>
             </div>
           </div>
         </div>
@@ -159,12 +159,12 @@
 
       <!-- Bottom Stats Grid (4 cards) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 mb-8">
-        <div v-for="(card, index) in bottomCards" :key="index" class="bg-white p-5 rounded-[20px] shadow-sm border border-gray-300 flex justify-between items-start hover:shadow-md transition-all text-left">
+        <div v-for="(card, index) in bottomCards" :key="index" class="bg-[#0A0A0A] p-5 rounded-[20px] shadow-sm border border-[#1A1A1A] flex justify-between items-start hover:shadow-md transition-all text-left">
           <div class="text-left flex flex-col gap-1">
-            <div class="text-[22px] font-bold text-[#333] tracking-tight leading-none text-left">{{ card.value }}</div>
-            <div class="text-[13px] text-gray-400 font-bold uppercase tracking-wider text-left">{{ card.label }}</div>
+            <div class="text-[22px] font-bold text-white tracking-tight leading-none text-left">{{ card.value }}</div>
+            <div class="text-[13px] text-gray-500 font-bold uppercase tracking-wider text-left">{{ card.label }}</div>
           </div>
-          <div class="w-10 h-10 rounded-full bg-[#005858]/20 flex items-center justify-center text-[#005858] flex-shrink-0 transition-all group-hover:bg-[#005858] group-hover:text-white">
+          <div class="w-10 h-10 rounded-full bg-[#D7FF00]/10 flex items-center justify-center text-[#D7FF00] flex-shrink-0 transition-all group-hover:bg-[#D7FF00] group-hover:text-black">
             <component :is="card.icon" :size="18" stroke-width="2.5" />
           </div>
         </div>
@@ -351,6 +351,15 @@ export default {
 .chart-path-area {
   opacity: 0;
   animation: fadeIn 1.2s ease-out 1s forwards;
+}
+
+.chart-page-container {
+  padding: 2rem 1rem;
+  flex: 1;
+  background-color: #000000;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .dot-grow {

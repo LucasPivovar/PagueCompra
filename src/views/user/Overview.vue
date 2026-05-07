@@ -1,21 +1,21 @@
 <template>
   <AdminLayout>
-    <div class="flex flex-col gap-6 font-poppins text-left mb-10">
+    <div class="flex flex-col gap-6 font-outfit text-left mb-10">
       <!-- Header -->
-      <div class="px-2 font-poppins flex flex-col gap-1">
-        <h1 class="text-2xl font-black text-[#333]">Dashboard</h1>
-        <p class="text-[14px] text-gray-400 font-bold">Visão geral das suas vendas e métricas</p>
+      <div class="px-2 font-outfit flex flex-col gap-1">
+        <h1 class="text-2xl font-black text-[white]">Dashboard</h1>
+        <p class="text-[14px] text-gray-500 font-bold">Visão geral das suas vendas e métricas</p>
       </div>
 
       <!-- Top Stats Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-        <div v-for="(card, index) in topCards" :key="index" class="bg-white p-5 rounded-[20px] shadow-sm border border-gray-300 flex justify-between items-start hover:shadow-md transition-all group">
+        <div v-for="(card, index) in topCards" :key="index" class="bg-[#0A0A0A] p-5 rounded-[20px] shadow-sm border border-[#1A1A1A] flex justify-between items-start hover:shadow-md transition-all group">
           <div class="flex flex-col gap-1">
-            <div class="text-[22px] font-bold text-[#333] tracking-tight leading-none">{{ card.value }}</div>
-            <div class="text-[13px] text-gray-400 font-bold uppercase tracking-wider">{{ card.label }}</div>
-            <div v-if="card.subtext" class="text-[12px] font-bold text-[#005858] mt-1">{{ card.subtext }}</div>
+            <div class="text-[22px] font-bold text-[white] tracking-tight leading-none">{{ card.value }}</div>
+            <div class="text-[13px] text-gray-500 font-bold uppercase tracking-wider">{{ card.label }}</div>
+            <div v-if="card.subtext" class="text-[12px] font-bold text-[#D7FF00] mt-1">{{ card.subtext }}</div>
           </div>
-          <div class="w-10 h-10 rounded-full bg-[#005858]/20 flex items-center justify-center text-[#005858] transition-all group-hover:bg-[#005858] group-hover:text-white">
+          <div class="w-10 h-10 rounded-full bg-[#D7FF00]/20 flex items-center justify-center text-[#D7FF00] transition-all group-hover:bg-[#D7FF00] group-hover:text-white">
             <component :is="card.icon" :size="20" stroke-width="2.5" />
           </div>
         </div>
@@ -24,45 +24,45 @@
       <!-- Middle Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-2">
         <!-- Meios de Pagamento -->
-        <div class="lg:col-span-2 bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-8">
-          <h3 class="text-base font-bold text-[#333]">Meios de Pagamento</h3>
+        <div class="lg:col-span-2 bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-8">
+          <h3 class="text-base font-bold text-[white]">Meios de Pagamento</h3>
           
           <div class="flex flex-col gap-6">
             <div v-for="(payment, index) in paymentMethods" :key="index" class="flex flex-col gap-3">
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400">
+                  <div class="w-10 h-10 rounded-xl bg-[#1A1A1A] flex items-center justify-center text-gray-500">
                      <component :is="payment.icon" :size="20" />
                   </div>
-                  <span class="font-bold text-[#333]">{{ payment.name }}</span>
+                  <span class="font-bold text-[white]">{{ payment.name }}</span>
                 </div>
                 <div class="flex gap-12 text-right">
                   <div class="flex flex-col">
-                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Aprovação</span>
-                    <span class="text-[14px] font-bold text-[#333]">{{ payment.approval }}%</span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Aprovação</span>
+                    <span class="text-[14px] font-bold text-[white]">{{ payment.approval }}%</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Valor</span>
-                    <span class="text-[14px] font-bold text-[#333]">{{ payment.value }}</span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Valor</span>
+                    <span class="text-[14px] font-bold text-[white]">{{ payment.value }}</span>
                   </div>
                 </div>
               </div>
-              <div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden">
+              <div class="w-full bg-[#1A1A1A] h-2.5 rounded-full overflow-hidden">
                 <div class="h-full rounded-full transition-all duration-1000" 
-                     :style="{ width: payment.approval + '%', backgroundColor: '#005858' }"></div>
+                     :style="{ width: payment.approval + '%', backgroundColor: '#D7FF00' }"></div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Métricas -->
-        <div class="bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-6">
-          <h3 class="text-base font-bold text-[#333]">Métricas</h3>
+        <div class="bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-6">
+          <h3 class="text-base font-bold text-[white]">Métricas</h3>
           <div class="flex flex-col gap-4">
             <div v-for="(metric, index) in metrics" :key="index" 
-                 class="p-5 rounded-2xl flex flex-col gap-1 transition-all hover:translate-x-1 border border-gray-100 bg-[#005858]/5">
-              <span class="text-[12px] font-bold text-gray-400 uppercase tracking-wider">{{ metric.label }}</span>
-              <span class="text-[20px] font-bold text-[#333]">{{ metric.value }}%</span>
+                 class="p-5 rounded-2xl flex flex-col gap-1 transition-all hover:translate-x-1 border border-[#D7FF00]/20 bg-[#D7FF00]/5">
+              <span class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{{ metric.label }}</span>
+              <span class="text-[20px] font-bold text-[white]">{{ metric.value }}%</span>
             </div>
           </div>
         </div>
@@ -71,27 +71,27 @@
       <!-- Bottom Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-2">
         <!-- Volume Financeiro (Advanced Chart) -->
-        <div class="lg:col-span-2 bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-6 relative">
+        <div class="lg:col-span-2 bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-6 relative">
           <div class="flex justify-between items-center">
-            <h3 class="text-base font-bold text-[#333]">Volume Financeiro</h3>
-            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Vendas (R$)</span>
+            <h3 class="text-base font-bold text-[white]">Volume Financeiro</h3>
+            <span class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Vendas (R$)</span>
           </div>
           
           <div class="relative h-[280px] w-full mt-4 pb-12" @mouseleave="hoveredPoint = null">
             <!-- Y-Axis labels -->
-            <div class="absolute left-0 h-[200px] flex flex-col justify-between text-[11px] text-gray-400 font-bold pr-4 pointer-events-none text-right w-10">
+            <div class="absolute left-0 h-[200px] flex flex-col justify-between text-[11px] text-gray-500 font-bold pr-4 pointer-events-none text-right w-10">
               <span>{{ maxChartValue }}</span>
               <span>{{ Math.round(maxChartValue * 0.5) }}</span>
               <span>0</span>
             </div>
             
             <!-- Grid Lines -->
-            <div class="ml-12 h-[200px] flex flex-col justify-between border-b border-gray-100 pointer-events-none">
-               <div v-for="i in 2" :key="i" class="w-full border-t border-dashed border-gray-100 h-0"></div>
+            <div class="ml-12 h-[200px] flex flex-col justify-between border-b border-[#1A1A1A] pointer-events-none">
+               <div v-for="i in 2" :key="i" class="w-full border-t border-dashed border-[#1A1A1A] h-0"></div>
             </div>
 
             <!-- Plotting Area -->
-            <div class="absolute top-0 left-12 right-0 h-[200px] overflow-visible text-[#005858]">
+            <div class="absolute top-0 left-12 right-0 h-[200px] overflow-visible text-[#D7FF00]">
               <svg 
                 class="w-full h-full overflow-visible" 
                 viewBox="0 0 1000 200" 
@@ -122,7 +122,7 @@
               <div 
                 v-for="(point, idx) in chartData" 
                 :key="'dot-' + idx"
-                class="absolute w-3 h-3 bg-[#005858] border-2 border-white rounded-full shadow-md z-10 transition-all duration-300 dot-grow"
+                class="absolute w-3 h-3 bg-[#D7FF00] border-2 border-white rounded-full shadow-md z-10 transition-all duration-300 dot-grow"
                 :class="{ 'scale-150 z-20 shadow-lg': hoveredPoint === idx }"
                 :style="{ 
                   left: `${getXPercent(idx)}%`, 
@@ -153,29 +153,29 @@
                   top: `${getYPercentInternal(chartData[hoveredPoint].value)}%` 
                 }"
               >
-                <div class="text-gray-400 uppercase text-[10px] tracking-widest mb-0.5">{{ chartData[hoveredPoint].month }}</div>
+                <div class="text-gray-500 uppercase text-[10px] tracking-widest mb-0.5">{{ chartData[hoveredPoint].month }}</div>
                 <div class="text-[14px]">R$ {{ chartData[hoveredPoint].value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</div>
                 <div class="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#313131] rotate-45"></div>
               </div>
             </div>
 
             <!-- Month Labels -->
-            <div class="absolute top-[215px] left-12 right-0 flex justify-between text-[11px] text-gray-400 font-bold px-0">
+            <div class="absolute top-[215px] left-12 right-0 flex justify-between text-[11px] text-gray-500 font-bold px-0">
                <span v-for="point in chartData" :key="point.month">{{ point.month }}</span>
             </div>
           </div>
         </div>
 
         <!-- Atividade Recente -->
-        <div class="bg-white p-6 rounded-[20px] shadow-sm border border-gray-300 flex flex-col gap-6">
-          <h3 class="text-base font-bold text-[#333]">Atividade Recente</h3>
+        <div class="bg-[#0A0A0A] p-6 rounded-[20px] shadow-sm border border-[#1A1A1A] flex flex-col gap-6">
+          <h3 class="text-base font-bold text-[white]">Atividade Recente</h3>
           <div class="flex flex-col">
-            <div v-for="(sale, index) in recentSales" :key="index" class="py-4 border-b last:border-0 border-gray-100 flex justify-between items-center group hover:bg-gray-50/50 px-2 rounded-lg transition-all cursor-pointer">
+            <div v-for="(sale, index) in recentSales" :key="index" class="py-4 border-b last:border-0 border-[#1A1A1A] flex justify-between items-center group hover:bg-[#1A1A1A]/50 px-2 rounded-lg transition-all cursor-pointer">
               <div class="text-left flex flex-col gap-0.5">
-                <div class="text-[14px] font-bold text-[#333]">{{ sale.type }}</div>
-                <div class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">{{ sale.date }}</div>
+                <div class="text-[14px] font-bold text-[white]">{{ sale.type }}</div>
+                <div class="text-[12px] text-gray-500 font-bold uppercase tracking-wider">{{ sale.date }}</div>
               </div>
-              <div class="text-[14px] font-bold text-[#333]">{{ sale.value }}</div>
+              <div class="text-[14px] font-bold text-[white]">{{ sale.value }}</div>
             </div>
           </div>
         </div>
@@ -270,8 +270,8 @@ export default {
 <style scoped>
 @reference "tailwindcss";
 
-.font-poppins {
-  font-family: 'Poppins', sans-serif;
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
 }
 
 .chart-line-main {

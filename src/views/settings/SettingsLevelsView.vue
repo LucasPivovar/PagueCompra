@@ -1,27 +1,27 @@
 <template>
   <AdminLayout>
-    <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
+    <div class="flex flex-col gap-6 font-outfit text-left mb-10 pb-20">
       <!-- Page Header -->
       <div class="px-2">
-        <h1 class="text-[22px] font-black text-[#333]">Ajuste de Níveis</h1>
+        <h1 class="text-[22px] font-black text-[white]">Ajuste de Níveis</h1>
       </div>
 
       <!-- Status Toggle Bar (Slider) -->
       <div class="px-2">
-        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div class="bg-[#0A0A0A] p-5 rounded-2xl border border-[#1A1A1A] shadow-sm flex items-center justify-between">
           <div class="flex items-center gap-4">
              <div class="w-10 h-10 rounded-full bg-[#00A86B]/15 flex items-center justify-center text-[#00A86B]">
                 <Activity :size="20" stroke-width="2.5" />
              </div>
              <div class="flex flex-col">
-                <span class="text-[14px] font-black text-[#333]">Sistema de níveis ativo</span>
-                <span class="text-[11px] text-gray-400 font-medium italic">Ative para habilitar as regras de faturamento por nível</span>
+                <span class="text-[14px] font-black text-[white]">Sistema de níveis ativo</span>
+                <span class="text-[11px] text-gray-500 font-medium italic">Ative para habilitar as regras de faturamento por nível</span>
              </div>
           </div>
           
           <label class="relative inline-flex items-center cursor-pointer group">
             <input type="checkbox" v-model="isSystemActive" class="sr-only peer">
-            <div class="w-16 h-8 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-8 after:transition-all peer-checked:bg-[#00A86B] shadow-inner transition-all group-hover:after:scale-95"></div>
+            <div class="w-16 h-8 bg-[#1A1A1A] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-[#0A0A0A] after:border-[#1A1A1A] after:border after:rounded-full after:h-6 after:w-8 after:transition-all peer-checked:bg-[#00A86B] shadow-inner transition-all group-hover:after:scale-95"></div>
           </label>
         </div>
       </div>
@@ -29,34 +29,34 @@
       <!-- Levels Card Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-2 mt-4">
         <!-- Level Cards -->
-        <div v-for="(level, index) in levels" :key="level.id" class="bg-white rounded-[24px] border border-gray-200 shadow-sm flex flex-col p-6 gap-5 hover:shadow-md transition-all group relative overflow-hidden">
+        <div v-for="(level, index) in levels" :key="level.id" class="bg-[#0A0A0A] rounded-[24px] border border-[#1A1A1A] shadow-sm flex flex-col p-6 gap-5 hover:shadow-md transition-all group relative overflow-hidden">
           <!-- Animated highlight on top -->
           <div class="absolute top-0 left-0 w-full h-1" :style="{ backgroundColor: level.color }"></div>
 
           <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Nome</label>
-            <input type="text" v-model="level.name" class="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-[#333] focus:outline-none focus:border-[#005858] focus:bg-white transition-all" />
+            <label class="text-[11px] font-black text-gray-500 uppercase tracking-widest ml-1">Nome</label>
+            <input type="text" v-model="level.name" class="w-full bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl px-4 py-3 text-sm font-bold text-[white] focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] transition-all" />
           </div>
 
           <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Mínimo (R$)</label>
-            <input type="text" v-model="level.min" class="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-[#333] focus:outline-none focus:border-[#005858] focus:bg-white transition-all" />
+            <label class="text-[11px] font-black text-gray-500 uppercase tracking-widest ml-1">Mínimo (R$)</label>
+            <input type="text" v-model="level.min" class="w-full bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl px-4 py-3 text-sm font-bold text-[white] focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] transition-all" />
           </div>
 
           <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Máximo (R$)</label>
-            <input type="text" v-model="level.max" class="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-4 py-3 text-sm font-bold text-[#333] focus:outline-none focus:border-[#005858] focus:bg-white transition-all" />
+            <label class="text-[11px] font-black text-gray-500 uppercase tracking-widest ml-1">Máximo (R$)</label>
+            <input type="text" v-model="level.max" class="w-full bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl px-4 py-3 text-sm font-bold text-[white] focus:outline-none focus:border-[#D7FF00] focus:bg-[#0A0A0A] transition-all" />
           </div>
 
           <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Cor do Nível</label>
+            <label class="text-[11px] font-black text-gray-500 uppercase tracking-widest ml-1">Cor do Nível</label>
             <div class="flex items-center gap-3">
                <div 
                  @click="$refs['colorPicker-' + index][0].click()"
-                 class="w-full h-11 rounded-xl cursor-pointer transition-all hover:scale-[1.03] border-2 border-gray-50 shadow-sm flex items-center justify-center px-4 group/color"
+                 class="w-full h-11 rounded-xl cursor-pointer transition-all hover:scale-[1.03] border-2 border-[#1A1A1A] shadow-sm flex items-center justify-center px-4 group/color"
                  :style="{ backgroundColor: level.color }"
                >
-                 <div class="w-5 h-5 rounded-full bg-white/30 border border-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/color:opacity-100 transition-opacity">
+                 <div class="w-5 h-5 rounded-full bg-[#0A0A0A]/30 border border-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/color:opacity-100 transition-opacity">
                     <Plus class="text-white" :size="12" stroke-width="4" />
                  </div>
                </div>
@@ -90,14 +90,14 @@
         <!-- Add Level Card -->
         <div 
           @click="addLevel"
-          class="bg-white rounded-[24px] border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-6 min-h-[440px] gap-4 group cursor-pointer hover:border-[#005858] hover:bg-gray-50/50 transition-all shadow-sm shadow-black/[0.02]"
+          class="bg-[#0A0A0A] rounded-[24px] border-2 border-dashed border-[#1A1A1A] flex flex-col items-center justify-center p-6 min-h-[440px] gap-4 group cursor-pointer hover:border-[#D7FF00] hover:bg-[#1A1A1A]/50 transition-all shadow-sm shadow-black/[0.02]"
         >
-          <div class="w-20 h-20 rounded-full bg-gray-50 group-hover:bg-[#005858]/10 flex items-center justify-center text-gray-300 group-hover:text-[#005858] transition-all transform group-hover:scale-110">
+          <div class="w-20 h-20 rounded-full bg-[#1A1A1A] group-hover:bg-[#D7FF00]/10 flex items-center justify-center text-gray-500 group-hover:text-[#D7FF00] transition-all transform group-hover:scale-110">
             <Plus :size="40" stroke-width="3" />
           </div>
           <div class="flex flex-col items-center">
-             <span class="text-[14px] font-black text-gray-400 uppercase tracking-widest group-hover:text-[#333] transition-colors">Novo Nível</span>
-             <span class="text-[11px] text-gray-300 font-bold group-hover:text-gray-400 mt-1">Clique para criar</span>
+             <span class="text-[14px] font-black text-gray-500 uppercase tracking-widest group-hover:text-[white] transition-colors">Novo Nível</span>
+             <span class="text-[11px] text-gray-500 font-bold group-hover:text-gray-500 mt-1">Clique para criar</span>
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@ export default {
         name: 'Novo Nível',
         min: '0.00',
         max: '0.00',
-        color: '#005858'
+        color: '#D7FF00'
       })
       this.showToast('Novo nível adicionado', 'success')
     },
@@ -159,7 +159,7 @@ export default {
 @reference "tailwindcss";
 
 input:focus {
-  @apply ring-4 ring-[#005858]/5 border-[#005858];
+  @apply ring-4 ring-[#D7FF00]/5 border-[#D7FF00];
 }
 
 /* Custom scrollbar for cards if needed */

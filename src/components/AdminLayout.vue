@@ -11,7 +11,7 @@
     </div>
 
     <!-- Floating Chat Button -->
-    <button class="fixed right-[25px] bottom-[25px] w-14 h-14 bg-[#005858] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-[9999] border-4 border-white/20">
+    <button class="fixed right-[25px] bottom-[25px] w-14 h-14 bg-[#D7FF00] text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-[9999] border-4 border-black/20">
        <MessageSquare :size="24" stroke-width="2.5" />
     </button>
   </div>
@@ -61,7 +61,8 @@ export default {
 </script>
 
 <style scoped>
-@reference "tailwindcss";
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 .admin-layout {
   display: flex;
@@ -70,6 +71,7 @@ export default {
   overflow-x: hidden;
   width: 100vw;
   max-width: 100%;
+  background-color: #000000 !important;
 }
 
 .main-content {
@@ -105,7 +107,7 @@ export default {
 .page-container {
   padding: 2rem 1rem;
   flex: 1;
-  background-color: #f8fafc;
+  background-color: #000000 !important;
   min-width: 0;
   max-width: 100%;
   overflow-x: hidden;

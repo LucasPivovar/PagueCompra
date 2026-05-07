@@ -1,24 +1,24 @@
 <template>
   <aside class="sidebar" :class="{ 'collapsed': isCollapsed }">
-    <nav class="sidebar-nav py-4 font-poppins flex-1 overflow-y-auto overflow-x-hidden bg-white border-r border-dashed border-[#cbd5e1] transition-all duration-300 flex flex-col">
+    <nav class="sidebar-nav py-4 font-outfit flex-1 overflow-y-auto overflow-x-hidden bg-[#0A0A0A] border-r border-dashed border-[#1A1A1A] transition-all duration-300 flex flex-col">
       <!-- Goal Progress Section -->
       <div v-show="!isCollapsed" class="px-7 mb-8 transition-all duration-300">
         <div class="flex justify-between items-center mb-2">
-          <span class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Meta Mensal</span>
-          <span class="text-[10px] font-black text-[#005858]">0%</span>
+          <span class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em]">Meta Mensal</span>
+          <span class="text-[10px] font-black text-[#D7FF00]">0%</span>
         </div>
-        <div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden mb-2">
-          <div class="bg-[#005858] h-full rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(0,88,88,0.3)]" style="width: 5%"></div>
+        <div class="w-full bg-[#1A1A1A] h-2.5 rounded-full overflow-hidden mb-2">
+          <div class="bg-[#D7FF00] h-full rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(215,255,0,0.3)]" style="width: 5%"></div>
         </div>
-        <div class="text-[11px] font-bold text-gray-400">
-          R$ 0,00 <span class="text-gray-300 mx-1">/</span> <span class="text-[#333]">R$ 10.000,00</span>
+        <div class="text-[11px] font-bold text-gray-500">
+          R$ 0,00 <span class="text-gray-600 mx-1">/</span> <span class="text-white">R$ 10.000,00</span>
         </div>
       </div>
 
       <div class="px-3 flex flex-col gap-8">
         <!-- New Principal Section for Users -->
         <div class="flex flex-col gap-1">
-          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2">USUÁRIO</span>
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-500 uppercase tracking-[0.25em] text-left block mb-2">USUÁRIO</span>
           
           <router-link to="/dashboard" class="nav-item group">
             <LayoutDashboard :size="20" class="flex-shrink-0" />
@@ -35,7 +35,7 @@
               <ChevronDown v-if="!isCollapsed" :size="16" class="transition-transform duration-200" :class="{ 'rotate-180': isExtratosOpen }" />
             </button>
             
-            <div v-show="isExtratosOpen && !isCollapsed" class="flex flex-col gap-1 ml-4 mt-1 border-l border-dashed border-gray-100 pl-2">
+            <div v-show="isExtratosOpen && !isCollapsed" class="flex flex-col gap-1 ml-4 mt-1 border-l border-dashed border-[#1A1A1A] pl-2">
               <router-link to="/financial/income" class="nav-item group py-2">
                 <ArrowDownCircle :size="18" class="flex-shrink-0" />
                 <span class="font-bold text-[13px]">Entrada</span>
@@ -70,7 +70,7 @@
 
         <!-- Dashboard & Core Management -->
         <div class="flex flex-col gap-1">
-          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2">ADMINISTRAÇÃO</span>
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-500 uppercase tracking-[0.25em] text-left block mb-2">ADMINISTRAÇÃO</span>
           <router-link to="/" class="nav-item group">
             <LayoutDashboard :size="20" class="flex-shrink-0" />
             <span v-if="!isCollapsed" class="font-bold text-[14px]">Dashboard</span>
@@ -105,7 +105,7 @@
 
         <!-- Section: Configurações -->
         <div class="flex flex-col gap-1">
-          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-300 uppercase tracking-[0.25em] text-left block mb-2 font-poppins">CONFIGURAÇÕES</span>
+          <span v-if="!isCollapsed" class="px-4 text-[10px] font-black text-gray-500 uppercase tracking-[0.25em] text-left block mb-2 font-outfit">CONFIGURAÇÕES</span>
           <router-link to="/settings/general" class="nav-item group">
              <Sliders :size="18" class="flex-shrink-0" />
              <span v-if="!isCollapsed" class="font-bold text-[14px]">Gerais</span>
@@ -122,13 +122,13 @@
       </div>
 
       <!-- Profile Section at Bottom - Mobile only -->
-      <div class="lg:hidden mt-auto px-3 py-6 border-t border-gray-100 bg-gray-50/50">
+      <div class="lg:hidden mt-auto px-3 py-6 border-t border-[#1A1A1A] bg-[#1A1A1A]/50">
         <div class="flex items-center p-2 rounded-2xl transition-all duration-200" :class="isCollapsed ? 'justify-center px-0' : 'gap-3 px-4'">
-          <div class="w-10 h-10 rounded-full bg-[#005858] flex items-center justify-center text-white font-black text-xs shadow-lg shadow-green-900/20 flex-shrink-0 border-2 border-white">
+          <div class="w-10 h-10 rounded-full bg-[#D7FF00] flex items-center justify-center text-black font-black text-xs shadow-lg shadow-lime-900/20 flex-shrink-0 border-2 border-black/20">
             AD
           </div>
           <div v-if="!isCollapsed" class="flex flex-col text-left overflow-hidden">
-            <span class="text-[14px] font-black text-[#333] whitespace-nowrap">Administrador</span>
+            <span class="text-[14px] font-black text-white whitespace-nowrap">Administrador</span>
             <span class="text-[11px] text-gray-400 font-bold whitespace-nowrap uppercase tracking-wider">Super Admin</span>
           </div>
         </div>
@@ -210,15 +210,15 @@ export default {
 }
 
 .nav-item {
-  @apply flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 text-gray-400 hover:bg-gray-50 hover:text-[#333] cursor-pointer mx-1 no-underline;
+  @apply flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 text-gray-400 hover:bg-white/5 hover:text-white cursor-pointer mx-1 no-underline;
 }
 
 .router-link-active {
-  @apply bg-[#f0f9f4] text-[#005858] shadow-sm;
+  @apply bg-[#1A1A1A] text-[#D7FF00] shadow-sm;
 }
 
 .router-link-active span {
-  @apply text-[#005858];
+  @apply text-[#D7FF00];
 }
 
 /* Custom transitions for icons in collapsed mode */
@@ -234,7 +234,7 @@ export default {
   background: transparent;
 }
 .sidebar-nav::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #D7FF00;
   border-radius: 10px;
 }
 </style>

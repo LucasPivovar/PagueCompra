@@ -1,17 +1,17 @@
 <template>
   <AdminLayout>
-    <div class="flex flex-col gap-6 font-poppins text-left mb-10 pb-20">
+    <div class="flex flex-col gap-6 font-outfit text-left mb-10 pb-20">
       <div class="flex flex-col md:flex-row items-stretch md:items-end justify-between px-2 mb-2 gap-4">
-        <div class="flex items-center justify-center md:justify-start gap-8 border-b border-gray-100 flex-1">
+        <div class="flex items-center justify-center md:justify-start gap-8 border-b border-[#1A1A1A] flex-1">
           <div 
-            class="pb-4 text-lg font-black transition-all text-[#005858] border-b-2 border-[#005858]"
+            class="pb-4 text-lg font-black transition-all text-[#D7FF00] border-b-2 border-[#D7FF00]"
           >
             Saídas
           </div>
         </div>
         <button 
           @click="showModal = true"
-          class="bg-[#005858] text-white px-6 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
+          class="bg-[#D7FF00] text-black px-6 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-900/10 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
         >
           <Plus :size="18" stroke-width="3" />
           Criar transação
@@ -29,10 +29,10 @@
       <div class="flex flex-col gap-8">
         <!-- Top KPI Cards Row 1 -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-          <div v-for="kpi in kpisRow1" :key="kpi.label" class="bg-white p-5 rounded-[20px] border border-gray-200 border-l-4 border-l-[#991b1b] flex justify-between items-center shadow-sm">
+          <div v-for="kpi in kpisRow1" :key="kpi.label" class="bg-[#0A0A0A] p-5 rounded-[20px] border border-[#1A1A1A] border-l-4 border-l-[#991b1b] flex justify-between items-center shadow-sm">
             <div class="flex flex-col">
-              <div class="text-[24px] font-black text-[#333]">{{ kpi.value }}</div>
-              <div class="text-[12px] text-gray-400 font-bold">{{ kpi.label }}</div>
+              <div class="text-[24px] font-black text-[white]">{{ kpi.value }}</div>
+              <div class="text-[12px] text-gray-500 font-bold">{{ kpi.label }}</div>
             </div>
             <div class="w-10 h-10 rounded-full bg-[#fee2e2] flex items-center justify-center text-[#991b1b]">
               <component :is="kpi.icon" :size="20" stroke-width="3" />
@@ -42,10 +42,10 @@
 
         <!-- Top KPI Cards Row 2 -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
-          <div v-for="kpi in kpisRow2" :key="kpi.label" class="bg-white p-5 rounded-[20px] border border-gray-200 border-l-4 border-l-[#991b1b] flex justify-between items-center shadow-sm h-[110px]">
+          <div v-for="kpi in kpisRow2" :key="kpi.label" class="bg-[#0A0A0A] p-5 rounded-[20px] border border-[#1A1A1A] border-l-4 border-l-[#991b1b] flex justify-between items-center shadow-sm h-[110px]">
             <div class="flex flex-col">
-              <div class="text-[24px] font-black text-[#333]">R$ {{ kpi.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</div>
-              <div class="text-[12px] text-gray-400 font-bold">{{ kpi.label }}</div>
+              <div class="text-[24px] font-black text-[white]">R$ {{ kpi.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</div>
+              <div class="text-[12px] text-gray-500 font-bold">{{ kpi.label }}</div>
             </div>
             <div class="w-10 h-10 rounded-full bg-[#fee2e2] flex items-center justify-center text-[#991b1b]">
               <ArrowUpRight :size="20" stroke-width="3" />
@@ -55,29 +55,29 @@
 
         <!-- Transaction Table -->
         <div class="px-2">
-          <div class="bg-white rounded-[24px] shadow-sm border border-gray-200 overflow-hidden text-left">
+          <div class="bg-[#0A0A0A] rounded-[24px] shadow-sm border border-[#1A1A1A] overflow-hidden text-left">
             <div class="overflow-x-auto">
               <table class="w-full border-collapse">
                 <thead>
-                  <tr class="text-left border-b border-gray-50">
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider">Meio</th>
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider">User ID</th>
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider">Transação ID</th>
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider">Valor</th>
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider text-center">Status</th>
-                    <th class="px-6 py-5 text-[12px] font-bold text-gray-400 uppercase tracking-wider">Data</th>
+                  <tr class="text-left border-b border-[#1A1A1A]">
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider">Meio</th>
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider">User ID</th>
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider">Transação ID</th>
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider">Valor</th>
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider text-center">Status</th>
+                    <th class="px-6 py-5 text-[12px] font-bold text-gray-500 uppercase tracking-wider">Data</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="tx in paginatedTransactions" :key="tx.id" class="border-b border-gray-50 transition-all hover:bg-gray-50/50">
+                  <tr v-for="tx in paginatedTransactions" :key="tx.id" class="border-b border-[#1A1A1A] transition-all hover:bg-[#1A1A1A]/50">
                     <td class="px-6 py-4">
-                      <div class="text-gray-400">
+                      <div class="text-gray-500">
                         <ArrowUpRight :size="18" />
                       </div>
                     </td>
-                    <td class="px-6 py-4 text-[13px] font-bold text-[#333]">{{ tx.userId }}</td>
-                    <td class="px-6 py-4 text-[12px] text-gray-400 font-medium truncate max-w-[150px]">{{ tx.txId }}</td>
-                    <td class="px-6 py-4 text-[13px] font-bold text-[#333]">R$ {{ tx.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</td>
+                    <td class="px-6 py-4 text-[13px] font-bold text-[white]">{{ tx.userId }}</td>
+                    <td class="px-6 py-4 text-[12px] text-gray-500 font-medium truncate max-w-[150px]">{{ tx.txId }}</td>
+                    <td class="px-6 py-4 text-[13px] font-bold text-[white]">R$ {{ tx.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</td>
                     <td class="px-6 py-4 text-center">
                       <span class="bg-[#fef3c7] text-[#92400e] px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-wider">
                         {{ tx.status }}
@@ -90,8 +90,8 @@
             </div>
 
             <!-- Pagination Container -->
-            <div v-if="transactions.length > 9" class="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-8 border-t border-gray-100 text-center md:text-left">
-              <span class="text-sm font-medium text-gray-400">Mostrando {{ paginatedTransactions.length }} de {{ transactions.length }} transações</span>
+            <div v-if="transactions.length > 9" class="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-8 border-t border-[#1A1A1A] text-center md:text-left">
+              <span class="text-sm font-medium text-gray-500">Mostrando {{ paginatedTransactions.length }} de {{ transactions.length }} transações</span>
               <div class="flex flex-wrap justify-center gap-2">
                 <button @click="currentPage = Math.max(1, currentPage - 1)" class="pagination-btn" :disabled="currentPage === 1">Anterior</button>
                 <button 
@@ -104,8 +104,8 @@
                 <button @click="currentPage = Math.min(totalPages, currentPage + 1)" class="pagination-btn" :disabled="currentPage === totalPages">Próximo</button>
               </div>
             </div>
-            <div v-else-if="transactions.length > 0" class="px-6 py-4 border-t border-gray-100 text-left">
-              <span class="text-sm font-medium text-gray-400">Mostrando todas as {{ transactions.length }} transações</span>
+            <div v-else-if="transactions.length > 0" class="px-6 py-4 border-t border-[#1A1A1A] text-left">
+              <span class="text-sm font-medium text-gray-500">Mostrando todas as {{ transactions.length }} transações</span>
             </div>
           </div>
         </div>
@@ -189,15 +189,15 @@ export default {
 @reference "tailwindcss";
 
 .pagination-btn {
-  @apply px-4 py-2 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-400 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply px-4 py-2 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl text-sm font-bold text-gray-500 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 .pagination-btn:not(:disabled) {
-  @apply text-gray-600 border-gray-400 hover:border-[#005858] hover:text-[#005858];
+  @apply text-gray-600 border-gray-500 hover:border-[#D7FF00] hover:text-[#D7FF00];
 }
 
 .pagination-btn.active {
-  @apply bg-[#005858] text-white border-[#005858] shadow-lg shadow-green-900/10 scale-105;
+  @apply bg-[#D7FF00] text-black border-[#D7FF00] shadow-lg shadow-green-900/10 scale-105;
 }
 
 ::-webkit-scrollbar {
