@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[#f8fafc] font-outfit px-4 py-12">
+  <div class="min-h-screen flex items-center justify-center bg-black font-outfit px-4 py-12">
     <div class="max-w-md w-full">
       <!-- Card -->
       <div class="bg-[#0A0A0A] rounded-[20px] sm:rounded-[24px] shadow-sm border border-[#1A1A1A] p-6 sm:p-10 transition-all hover:shadow-md">
