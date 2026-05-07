@@ -4,7 +4,7 @@
       <!-- Logo Container - Fixed width for alignment -->
       <div class="hidden lg:flex items-center justify-center w-[250px] h-full border-r border-dashed border-[#1A1A1A] relative transition-all duration-300"
            :class="{ 'border-none': isCollapsed }">
-        <img src="../assets/logo.png" alt="PagAgora" class="h-10 w-auto object-contain transition-all duration-300" />
+        <img src="@/assets/logo.png" alt="PagAgora" class="h-10 w-auto object-contain transition-all duration-300" />
         
         <!-- Desktop Toggle Button - Positioned on the border -->
         <button @click="$emit('toggle-sidebar')" 
@@ -16,7 +16,7 @@
 
       <!-- Mobile Logo (Always visible on Left) -->
       <div class="lg:hidden pl-8">
-        <img src="../assets/logo.png" alt="Logo" class="h-7 w-auto" />
+        <img src="@/assets/logo.png" alt="Logo" class="h-7 w-auto" />
       </div>
     </div>
 
