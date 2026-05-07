@@ -19,7 +19,7 @@
             <div class="p-2 bg-[#D7FF00]/10 rounded-lg text-[#D7FF00]">
               <Bell :size="20" />
             </div>
-            <h2 class="text-lg font-bold text-gray-800">Notificações</h2>
+            <h2 class="text-lg font-bold text-white">Notificações</h2>
             <span v-if="notifications.length > 0" class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
               +{{ notifications.length }}
             </span>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="flex-1">
                   <div class="flex justify-between items-start mb-1">
-                    <span class="text-sm font-bold text-gray-800">{{ notif.title }}</span>
+                    <span class="text-sm font-bold text-white">{{ notif.title }}</span>
                     <span class="text-[10px] text-gray-500 font-bold uppercase mt-0.5">{{ notif.time }}</span>
                   </div>
                   <p class="text-[12px] text-gray-500 leading-relaxed">{{ notif.message }}</p>
@@ -68,7 +68,7 @@
           <button 
             @click="clearAll" 
             :disabled="notifications.length === 0"
-            class="w-full py-3 bg-[#0A0A0A] border border-[#1A1A1A] text-gray-600 rounded-xl text-xs font-bold hover:bg-[#1A1A1A] transition-colors uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            class="w-full py-3 bg-[#0A0A0A] border border-[#1A1A1A] text-white rounded-xl text-xs font-bold hover:bg-[#1A1A1A] transition-colors uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             Limpar Tudo
           </button>

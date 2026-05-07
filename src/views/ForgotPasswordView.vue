@@ -5,7 +5,7 @@
       <div class="bg-[#0A0A0A] rounded-[20px] sm:rounded-[24px] shadow-sm border border-[#1A1A1A] p-6 sm:p-10 transition-all hover:shadow-md">
         <!-- Logo Inside Card -->
         <div class="flex justify-center mb-6 sm:mb-8">
-          <img src="@/assets/logo.png" alt="PagAgora" class="h-10 sm:h-12 w-auto object-contain" />
+          <img src="../assets/logo.png" alt="PagAgora" class="h-10 sm:h-12 w-auto object-contain" />
         </div>
 
         <div v-if="!isSubmitted">
